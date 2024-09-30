@@ -7,7 +7,7 @@ const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f0f0f0;
+  background-color: #FFFCF5;
   min-height: 100vh;
 `;
 
@@ -17,15 +17,16 @@ const SearchBar = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  background-color: #ffffff;
+  background-color: #FFE6B8;
   border-radius: 20px;
   margin-bottom: 20px;
   margin-top: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
 `;
 
 const SearchInput = styled.input`
   width: 90%;
+  background-color: #FFE6B8;
   padding: 10px;
   border: none;
   border-radius: 10px;
@@ -60,8 +61,9 @@ const RightSection = styled.div`
 `;
 
 const Block = styled.div`
-  background-color: #ffffff;
+  background-color: #FFE6B8;
   padding: 20px;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
   margin-bottom: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -70,6 +72,7 @@ const Block = styled.div`
 const AIAnalysisBlock = styled(Block)`
     display: flex;
     flex-direction: column;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
     align-items: center;
     justify-content: center;
     height: 400px;
@@ -78,7 +81,8 @@ const AIAnalysisBlock = styled(Block)`
 const UploadButton = styled.button`
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: #8365e6;
+  background-color: #FCAB16;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
   color: white;
   border: none;
   border-radius: 10px;
@@ -89,6 +93,7 @@ const UploadButton = styled.button`
 
 const DrugInputBlock = styled(Block)`
   text-align: center;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
   font-size: 30px;
 `;
 
@@ -116,7 +121,9 @@ const ButtonGroup = styled.div`
 const InfoButton = styled.button`
   flex: 1;
   padding: 10px;
-  background-color: #c6b6fc;
+  color: #FFFFFF;
+  background-color: #FCAB16;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
   border: 1px solid #ddd;
   border-radius: 10px;
   cursor: pointer;
@@ -128,6 +135,7 @@ const InfoButton = styled.button`
 const DrugInfoBlock = styled(Block)`
   flex: 1;
   margin-top: 20px;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
   font-size: 20px;
 `;
 
@@ -140,7 +148,8 @@ const DrugList = styled.ul`
 const DrugItem = styled.li`
   margin-bottom: 10px;
   padding: 10px;
-  background-color: #f9f9f9;
+  background-color: #FFE6B8;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -154,7 +163,8 @@ const DrugIcon = styled.div`
 const AskPharmacistButton = styled.button`
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: #8365e6;
+  background-color: #FCAB16;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
   color: white;
   border: none;
   border-radius: 10px;
