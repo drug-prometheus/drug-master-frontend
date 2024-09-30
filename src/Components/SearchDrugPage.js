@@ -8,7 +8,7 @@ const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f0f0f0;
+  background-color: #FFFCF5;
   padding: 40px 20px;
   min-height: 100vh;
 `;
@@ -19,7 +19,7 @@ const SearchBarContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  background-color: #ffffff;
+  background-color: #FFE6B8;
   border-radius: 20px;
   margin-bottom: 30px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -27,6 +27,7 @@ const SearchBarContainer = styled.div`
 
 const SearchInput = styled.input`
   flex: 1;
+  background-color: #FFE6B8;
   padding: 10px;
   border: none;
   border-radius: 10px;
@@ -57,7 +58,7 @@ const DrugInfoContainer = styled.div`
 
 const DrugCard = styled.div`
   display: flex;
-  background-color: #ffffff;
+  background-color: #FFE6B8;
   padding: 15px;
   border-radius: 15px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
