@@ -6,17 +6,17 @@ const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f0f0f0;
+    background-color: #FFFCF5;
     min-height: 100vh;
     position: relative;
     padding: 20px;
 `;
 
 const FormContainer = styled.form`
-    background-color: #ffffff;
+    background-color: #FFE6B8;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
     width: 400px;
     display: flex;
     flex-direction: column;
@@ -34,13 +34,17 @@ const Input = styled.input`
     font-size: 25px;
     border-radius: 5px;
     border: 1px solid #ddd;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
+    background-color: #FFFCF5;
     outline: none;
 `;
 
 const Button = styled.button`
     padding: 10px;
     font-size: 20px;
-    background-color: #8365e6;
+    font-weight: bold;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
+    background-color: #FCAB16;
     color: white;
     border: none;
     border-radius: 5px;
@@ -48,7 +52,8 @@ const Button = styled.button`
     margin-top: 20px;
 
     &:disabled {
-        background-color: #cccccc;
+        background-color: #FFFCF5;
+        color: #000000;
         cursor: not-allowed;
     }
 `;
