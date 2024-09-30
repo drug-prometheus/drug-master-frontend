@@ -69,6 +69,7 @@ const HomeButton = styled.img`
     width: 50px;
     height: 50px;
     cursor: pointer;
+    filter: opacity(0.5) drop-shadow(0 0 0 #FCAB16);
     position: absolute;
     top: 20px;
     right: 20px;
