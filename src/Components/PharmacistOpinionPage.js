@@ -8,7 +8,7 @@ const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f0f0f0;
+    background-color: #FFFCF5;
     min-height: 100vh;
 `;
 
@@ -22,10 +22,10 @@ const ContentContainer = styled.div`
 
 const PatientListContainer = styled.div`
     width: 200px;
-    background-color: #ffffff;
+    background-color: #FFFCF5;
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
     margin-right: 20px;
 `;
 
@@ -37,7 +37,8 @@ const PatientTitle = styled.h2`
 const PatientItem = styled.div`
     margin-bottom: 10px;
     padding: 10px;
-    background-color: #f9f9f9;
+    background-color: #FFFCF5;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     cursor: pointer;
 
@@ -48,10 +49,10 @@ const PatientItem = styled.div`
 
 const NoteContainer = styled.div`
     flex: 1;
-    background-color: #ffffff;
+    background-color: #FFE6B8;
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
     position: relative; /* NoteContainer 내에서 HomeButton의 위치를 조정하기 위해 relative로 설정 */
 `;
 
@@ -65,10 +66,11 @@ const NoteContent = styled.textarea`
     height: 300px;
     font-size: 16px;
     border-radius: 10px;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
     border: 1px solid #ddd;
     outline: none;
     resize: none;
-    background-color: ${(props) => (props.editable ? '#ffffff' : '#f0f0f0')};
+    background-color: ${(props) => (props.editable ? '#FFFCF5' : '#FFFCF5')};
     pointer-events: ${(props) => (props.editable ? 'auto' : 'none')};
 `;
 
@@ -82,7 +84,8 @@ const ButtonContainer = styled.div`
 const EditButton = styled.button`
     font-size: 20px;
     padding: 10px 20px;
-    background-color: #8365e6;
+    background-color: #FCAB16;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
     color: white;
     border: none;
     border-radius: 10px;
@@ -92,7 +95,8 @@ const EditButton = styled.button`
 const SaveButton = styled.button`
     font-size: 20px;
     padding: 10px 20px;
-    background-color: #c6b6fc;
+    background-color: #FCAB16;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
     color: black;
     border: none;
     border-radius: 10px;
