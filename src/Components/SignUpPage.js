@@ -6,14 +6,14 @@ const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f0f0f0;
+    background-color: #FFFCF5;
     min-height: 100vh;
     position: relative;
     padding: 20px;
 `;
 
 const FormContainer = styled.form`
-    background-color: #ffffff;
+    background-color: #FFE6B8;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -33,6 +33,7 @@ const Input = styled.input`
     padding: 10px;
     font-size: 25px;
     border-radius: 5px;
+    background-color: #FFFCF5;
     border: 1px solid #ddd;
     outline: none;
 `;
@@ -58,7 +59,8 @@ const Button = styled.button`
     margin-top: 20px;
 
     &:disabled {
-        background-color: #cccccc;
+        background-color: #FFFCF5;
+        color: #000000;
         cursor: not-allowed;
     }
 `;
