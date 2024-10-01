@@ -49,16 +49,6 @@ const Button = styled.button`
     }
 `;
 
-const HomeButton = styled.img`
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    position: absolute;
-    filter: opacity(0.5) drop-shadow(0 0 0 #FCAB16);
-    top: 20px;
-    right: 20px;
-`;
-
 const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -78,17 +68,8 @@ const LoginPage = () => {
         }
     };
 
-    const goToHome = () => {
-        navigate('/');
-    };
-
     return (
         <MainContainer>
-            <HomeButton
-                src="home.png"
-                alt="홈"
-                onClick={goToHome}
-            />
             <FormContainer onSubmit={handleLogin}>
                 <FormTitle>로그인</FormTitle>
                 <Input
