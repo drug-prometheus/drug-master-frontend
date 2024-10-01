@@ -1,8 +1,7 @@
 // 약물 검색 페이지
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Header from './Header';
 import { MainContainer, SearchBar, SearchInput, SearchButton } from './\bGeneralStyle';
 
@@ -48,7 +47,11 @@ const DrugDescription = styled.p`
 const SearchDrugPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const navigate = useNavigate();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const query = queryParams.get('query');
+
+  
 
   const handleSearch = () => {
     // 여기에 실제 검색 로직을 추가하세요
@@ -73,7 +76,14 @@ const SearchDrugPage = () => {
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
   };
-  
+
+  useEffect(() => {
+    if (query != null){
+      setSearchTerm(query);
+      handleSearch();
+    }
+  }, []);
+
   return (
     <MainContainer>        
     <Header />
