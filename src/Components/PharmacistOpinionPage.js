@@ -47,7 +47,7 @@ const NoteContainer = styled.div`
     border-radius: 10px;
     padding: 20px;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
-    position: relative; /* NoteContainer 내에서 HomeButton의 위치를 조정하기 위해 relative로 설정 */
+    position: relative;
 `;
 
 const NoteTitle = styled.h2`
@@ -97,15 +97,6 @@ const SaveButton = styled.button`
     cursor: pointer;
 `;
 
-const HomeButton = styled.img`
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-`;
-
 const PharmacistOpinionPage = () => {
     const [selectedPatient, setSelectedPatient] = useState(null);
     const [noteContent, setNoteContent] = useState('');
@@ -147,11 +138,7 @@ const PharmacistOpinionPage = () => {
         alert('소견이 저장되었습니다.');
         setIsEditable(false);
       };
-    
-      const goToHome = () => {
-        navigate('/');
-      };
-    
+
     return (
     <MainContainer>
         <Header />
@@ -171,11 +158,6 @@ const PharmacistOpinionPage = () => {
                     value={noteContent}
                     onChange={handleNoteChange}
                     editable={isEditable}
-                />
-                <HomeButton
-                    src="home.png"
-                    alt="홈"
-                    onClick={goToHome}
                 />
             </NoteContainer>
         </ContentContainer>
