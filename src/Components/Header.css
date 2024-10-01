@@ -1,0 +1,52 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 15px 100px;
+    background-color: #FCAB16;
+    color: #fff;
+    width: 100%; /* 화면의 너비를 100%로 설정 */
+    position: relative;
+  }
+  
+  .header .container {
+    display: flex;
+    justify-content: space-between; /* 좌우 배치를 위해 공간을 분리 */
+    align-items: center;
+    max-width: 1200px; /* 내부 요소의 최대 너비를 설정 */
+    width: 100%; /* 컨테이너 너비를 100%로 */
+    margin: 0 auto; /* 화면 중앙으로 배치 */
+    padding: 0 20px; /* 좌우 패딩을 추가하여 요소를 더 중간으로 */
+  }
+
+  .logo {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .nav-menu ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-menu li {
+    margin: 0 15px;
+  }
+  
+  .nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-menu a:hover {
+    color: #ffa500;
+  }
+  
