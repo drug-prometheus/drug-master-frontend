@@ -1,11 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Header.css';
 
 function Header() {
+    const navigate = useNavigate();
   return (
     <header className="header">
         <div className='container'>
-        <img className="logo" src="drug-master-logo.png"></img>
+        <img className="logo" src="drug-master-logo.png" onClick={() => navigate('/')}></img>
         <nav className="nav-menu">
             <ul>
             <li><a href="/">Home</a></li>
