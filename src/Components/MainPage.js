@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Header from './Header';
 import { MainContainer, SearchBar, SearchInput, SearchButton } from './\bGeneralStyle';
+import { useNavigate } from 'react-router-dom';
 
 const ContentContainer = styled.div`
   display: flex;
@@ -142,6 +143,8 @@ const MainPage = () => {
   const [drugInfo, setDrugInfo] = useState(['A 약물', 'B 약물', 'C 약물']);
   const [newDrug, setNewDrug] = useState('');
   const [image, setImage] = useState(null);
+  const [queryInput, setQueryInput] = useState('');
+  const navigate = useNavigate();
 
   const handleDrugChange = (e) => {
     setNewDrug(e.target.value);
@@ -158,12 +161,21 @@ const MainPage = () => {
     setImage(URL.createObjectURL(e.target.files[0]));
   };
 
+  const handleQueryChange = (e) => {
+    setQueryInput(e.target.value); 
+  };
+
+  const searchDrug = () => {
+    console.log("button down");
+    navigate(((queryInput=='')? '/search' : '/search?query=' + queryInput));
+  };
+
   return (
     <MainContainer>
       <Header />
       <SearchBar>
-        <SearchInput placeholder="약 이름을 검색하세요" />
-        <SearchButton>🔍</SearchButton>
+        <SearchInput value={queryInput} onChange={handleQueryChange}  placeholder="약 이름을 검색하세요" />
+        <SearchButton onClick={searchDrug}>🔍</SearchButton>
       </SearchBar>
       <ContentContainer>
         <LeftSection>
