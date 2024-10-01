@@ -3,15 +3,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-
-const MainContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #FFFCF5;
-  padding: 40px 20px;
-  min-height: 100vh;
-`;
+import Header from './Header';
+import { MainContainer } from './\bGeneralStyle';
 
 const SearchBarContainer = styled.div`
   width: 100%;
@@ -124,6 +117,7 @@ const SearchDrugPage = () => {
 
   return (
     <MainContainer>        
+    <Header />
     <SearchBarContainer>
     <HomeButton src="home.png" alt="홈" onClick={goToHome}/>
         <SearchInput 

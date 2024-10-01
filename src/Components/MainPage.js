@@ -2,14 +2,8 @@
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
-const MainContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #FFFCF5;
-  min-height: 100vh;
-`;
+import Header from './Header';
+import { MainContainer } from './\bGeneralStyle';
 
 const SearchBar = styled.div`
   width: 90%;
@@ -196,6 +190,7 @@ const MainPage = () => {
 
   return (
     <MainContainer>
+      <Header />
       <SearchBar>
         <SearchInput placeholder="약 이름을 검색하세요" />
         <SearchButton>🔍</SearchButton>

@@ -1,16 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-
-const MainContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #FFFCF5;
-    min-height: 100vh;
-    position: relative;
-    padding: 20px;
-`;
+import { MainContainer } from './\bGeneralStyle';
 
 const FormContainer = styled.form`
     background-color: #FFE6B8;

@@ -3,14 +3,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-
-const MainContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #FFFCF5;
-    min-height: 100vh;
-`;
+import Header from './Header';
+import { MainContainer } from './\bGeneralStyle';
 
 const ContentContainer = styled.div`
     display: flex;
@@ -160,6 +154,7 @@ const PharmacistOpinionPage = () => {
     
     return (
     <MainContainer>
+        <Header />
         <ContentContainer>
             <PatientListContainer>
                 <PatientTitle>환자 관리</PatientTitle>
