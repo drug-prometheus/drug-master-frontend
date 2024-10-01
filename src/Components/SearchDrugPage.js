@@ -4,44 +4,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header';
-import { MainContainer } from './\bGeneralStyle';
-
-const SearchBarContainer = styled.div`
-  width: 100%;
-  max-width: 1400px;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  background-color: #FFE6B8;
-  border-radius: 20px;
-  margin-bottom: 30px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-`;
-
-const SearchInput = styled.input`
-  flex: 1;
-  background-color: #FFE6B8;
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
-  font-size: 30px;
-  outline: none;
-`;
-
-const SearchButton = styled.button`
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 30px;
-`;
-
-const HomeButton = styled.img`
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  margin-right: 20px;
-  margin-left: 10px;
-`;
+import { MainContainer, SearchBar, SearchInput, SearchButton } from './\bGeneralStyle';
 
 const DrugInfoContainer = styled.div`
   width: 100%;
@@ -110,23 +73,18 @@ const SearchDrugPage = () => {
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
   };
-
-  const goToHome = () => {
-    navigate('/');
-  };
-
+  
   return (
     <MainContainer>        
     <Header />
-    <SearchBarContainer>
-    <HomeButton src="home.png" alt="홈" onClick={goToHome}/>
+    <SearchBar>
         <SearchInput 
         placeholder="약 이름을 검색하세요" 
         value={searchTerm}
         onChange={handleInputChange}
         />
         <SearchButton onClick={handleSearch}>🔍</SearchButton>
-    </SearchBarContainer>
+    </SearchBar>
       <DrugInfoContainer>
         {searchResults.map(drug => (
           <DrugCard key={drug.id}>
