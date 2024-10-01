@@ -3,37 +3,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Header from './Header';
-import { MainContainer } from './\bGeneralStyle';
-
-const SearchBar = styled.div`
-  width: 90%;
-  max-width: 1400px;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  background-color: #FFE6B8;
-  border-radius: 20px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
-`;
-
-const SearchInput = styled.input`
-  width: 90%;
-  background-color: #FFE6B8;
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
-  font-size: 30px;
-  outline: none;
-`;
-
-const SearchButton = styled.button`
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 30px;
-`;
+import { MainContainer, SearchBar, SearchInput, SearchButton } from './\bGeneralStyle';
 
 const ContentContainer = styled.div`
   display: flex;
