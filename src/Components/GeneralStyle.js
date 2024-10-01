@@ -9,3 +9,33 @@ export const MainContainer = styled.div`
     position: relative;
     padding: 20px;
 `;
+
+export const SearchBar = styled.div`
+  width: 90%;
+  max-width: 1400px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #FFE6B8;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
+`;
+
+export const SearchInput = styled.input`
+  width: 90%;
+  background-color: #FFE6B8;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 30px;
+  outline: none;
+`;
+
+export const SearchButton = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 30px;
+`;
