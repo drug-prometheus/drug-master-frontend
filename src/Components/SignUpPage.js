@@ -56,16 +56,6 @@ const Button = styled.button`
     }
 `;
 
-const HomeButton = styled.img`
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    filter: opacity(0.5) drop-shadow(0 0 0 #FCAB16);
-    position: absolute;
-    top: 20px;
-    right: 20px;
-`;
-
 const SignUpPage = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -97,17 +87,8 @@ const SignUpPage = () => {
         setStudentId(''); // 라디오 버튼 해제 시 학번 필드를 초기화
     };
 
-    const goToHome = () => {
-        navigate('/');
-    };
-
     return (
         <MainContainer>
-            <HomeButton
-                src="home.png"
-                alt="홈"
-                onClick={goToHome}
-            />
             <FormContainer onSubmit={handleSignUp}>
                 <FormTitle>회원가입</FormTitle>
                 <Input
