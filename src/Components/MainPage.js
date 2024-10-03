@@ -216,7 +216,7 @@ const MainPage = () => {
                 </DrugItem>
               ))}
             </DrugList>
-            <AskPharmacistButton>약사 소견 묻기</AskPharmacistButton>
+            <AskPharmacistButton onClick={() => {alert("성공적으로 요청 했습니다.\n7~14일 안에 소견을 확인할 수 있습니다.");}}>약사 소견 묻기</AskPharmacistButton>
           </DrugInfoBlock>
         </RightSection>
       </ContentContainer>
