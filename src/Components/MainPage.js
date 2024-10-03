@@ -203,7 +203,7 @@ const MainPage = () => {
           </WelcomeBlock>
           <ButtonGroup>
             <InfoButton onClick={()=>{navigate("/opinion/user")}}>약사 소견 보기</InfoButton>
-            <InfoButton>약물 분석 확인</InfoButton>
+            <InfoButton onClick={()=>{navigate("/analysis")}}>약물 분석 확인</InfoButton>
           </ButtonGroup>
           <DrugInfoBlock>
             <h3>약물 정보 보기</h3>
