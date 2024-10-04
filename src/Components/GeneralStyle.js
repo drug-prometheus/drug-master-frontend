@@ -10,6 +10,10 @@ export const MainContainer = styled.div`
     padding: 20px;
 `;
 
+export const MainBlock = styled.div`
+  padding: 0px 0px 50px 50px;
+`
+
 export const SearchBar = styled.div`
   width: 90%;
   max-width: 1400px;
