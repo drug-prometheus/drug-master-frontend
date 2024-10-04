@@ -7,6 +7,7 @@ import SignUpPage from './Components/SignUpPage';
 import LoginPage from './Components/LoginPage';
 import OpinionPage from './Components/OpinionPage';
 import DrugAnalysisPage from './Components/DrugAnalysisPage';
+import IntroductionPage from './Components/IntroductionPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/analysis" element={<DrugAnalysisPage /> } />
         <Route path="/opinion/user" element={<OpinionPage />} />
+        <Route path="/introduction" element={<IntroductionPage />} />
       </Routes>
     </Router>
   );
