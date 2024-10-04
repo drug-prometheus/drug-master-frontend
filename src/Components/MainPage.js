@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Header from './Header';
-import { MainContainer, SearchBar, SearchInput, SearchButton } from './\bGeneralStyle';
+import { MainContainer, SearchBar, SearchInput, SearchButton, MainBlock } from './\bGeneralStyle';
 import { useNavigate } from 'react-router-dom';
 
 const ContentContainer = styled.div`
@@ -173,6 +173,7 @@ const MainPage = () => {
   return (
     <MainContainer>
       <Header />
+      <MainBlock>
       <SearchBar>
         <SearchInput value={queryInput} onChange={handleQueryChange}  placeholder="약 이름을 검색하세요" />
         <SearchButton onClick={searchDrug}>🔍</SearchButton>
@@ -220,6 +221,7 @@ const MainPage = () => {
           </DrugInfoBlock>
         </RightSection>
       </ContentContainer>
+      </MainBlock>
     </MainContainer>
   );
 };
