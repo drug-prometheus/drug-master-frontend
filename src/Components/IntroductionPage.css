@@ -1,0 +1,88 @@
+.container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.evenSection{
+    align-items: center;
+    background-color: #FFFCF5;
+    padding: 50px 50px 100px 100px;
+    width: 100%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    }
+.oddSection{
+    align-items: center;
+    background-color: #FFE6B8;
+    padding: 100px;
+    width: 100%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    }
+
+.subTitle {
+font-size: 18px;
+color: #333;
+}
+.descriptionBlock {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.descriptionItem {
+display: flex;
+align-items: center;
+margin-right: 20px;
+}
+.numberCircle {
+width: 30px;
+height: 30px;
+border-radius: 50%;
+ background-color: #FFA726;
+color: #fff;
+text-align: center;
+line-height: 30px;
+margin-right: 10px;
+}
+.subjectContainer {
+display: flex;
+justify-content: space-around;
+}
+.subjectItem {
+font-size: 20px;
+padding: 10px;
+}
+.targetSection {
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.targetItem {
+padding: 10px;
+ background-color: #D7BDE2;
+border-radius: 5px;
+font-size: 16px;
+text-align: center;
+}
+.arrow {
+font-size: 24px;
+color: #7D3C98;
+}
+.methodSection {
+display: flex;
+justify-content: space-around;
+}
+.methodItem {
+text-align: center;
+}
+.featureSection {
+display: flex;
+justify-content: space-around;
+}
+.featureItem {
+display: flex;
+align-items: center;
+}
