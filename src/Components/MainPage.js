@@ -180,6 +180,7 @@ const MainPage = () => {
   const { auth, logout } = useContext(AuthContext);
   const [queryInput, setQueryInput] = useState('');
   const [drugInfo, setDrugInfo] = useState(['A 약물', 'B 약물', 'C 약물']);
+  const [opinionRequest, setOpinionRequest] = useState(['홍길동', '정윤성']);
   const [newDrug, setNewDrug] = useState('');
   const [image, setImage] = useState(null);
   const navigate = useNavigate();
@@ -210,6 +211,46 @@ const MainPage = () => {
       alert("성공적으로 요청 했습니다.\n7~14일 안에 소견을 확인할 수 있습니다.");
     });
     }
+
+  const pillInfoBlock = ()=>{
+    if (auth.userType == '약사'){
+      return (
+        <DrugInfoBlock>
+          <h3>요청 소견 보기</h3>
+          <p>소견 요청한 환자는 다음과 같습니다 :</p>
+          <DrugList>
+            {opinionRequest.map((patientName, index) => (
+              <DrugItem key={index} onClick={()=>{
+                navigate('/opinion?patientName=' + patientName)
+              }}>
+                <DrugIcon>🤕</DrugIcon>
+                {patientName}
+              </DrugItem>
+            ))}
+          </DrugList>
+        </DrugInfoBlock>
+        );
+    }else
+      return (
+      <DrugInfoBlock>
+        <h3>약물 정보 보기</h3>
+        <p>{auth.username}님은 현재 아래 약물을 복용 중입니다:</p>
+        <DrugList>
+          {drugInfo.map((drug, index) => (
+            <DrugItem key={index}>
+              <DrugIcon>💊</DrugIcon>
+              {drug}
+            </DrugItem>
+          ))}
+        </DrugList>
+        <AskPharmacistButton onClick={()=>{
+          if (auth.username == null)
+            unloginedEvent(navigate);
+          else 
+            sendPillInfoToServer();
+        }}>약사 소견 묻기</AskPharmacistButton>
+      </DrugInfoBlock>);
+  };
 
   const buttonGroup = ()=>{
     if (auth.userType == '약사'){
@@ -276,28 +317,10 @@ const MainPage = () => {
                 loginedPatient(auth, logout)
               )}
           
-            {
-              buttonGroup() 
-            }
+            {buttonGroup()}
           
-          <DrugInfoBlock>
-            <h3>약물 정보 보기</h3>
-            <p>홍길동님은 현재 아래 약물을 복용 중입니다:</p>
-            <DrugList>
-              {drugInfo.map((drug, index) => (
-                <DrugItem key={index}>
-                  <DrugIcon>💊</DrugIcon>
-                  {drug}
-                </DrugItem>
-              ))}
-            </DrugList>
-            <AskPharmacistButton onClick={()=>{
-              if (auth.username == null)
-                unloginedEvent(navigate);
-              else 
-                sendPillInfoToServer();
-            }}>약사 소견 묻기</AskPharmacistButton>
-          </DrugInfoBlock>
+          {pillInfoBlock()}
+          
         </RightSection>
       </ContentContainer>
       </MainBlock>
