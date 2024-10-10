@@ -1,8 +1,8 @@
 // 약사 화면. 약사 소견 작성, 수정 및 관리 화면.
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Header from './Header';
 import { MainContainer } from './\bGeneralStyle';
 
@@ -101,6 +101,7 @@ const PharmacistOpinionPage = () => {
     const [selectedPatient, setSelectedPatient] = useState(null);
     const [noteContent, setNoteContent] = useState('');
     const [isEditable, setIsEditable] = useState(false);
+    const location = useLocation();
     const navigate = useNavigate();
 
     // 원래는 DB에서 가져와야 하지만 임시로 적어둠
@@ -138,6 +139,13 @@ const PharmacistOpinionPage = () => {
         alert('소견이 저장되었습니다.');
         setIsEditable(false);
       };
+      const queryParams = new URLSearchParams(location.search);
+    const patientName = queryParams.get('patientName');
+      useEffect(() => {
+        if (patientName != null){
+            handlePatientSelect(patientName + " 님")
+        }
+      }, []);
 
     return (
     <MainContainer>
