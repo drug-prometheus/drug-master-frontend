@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { MainContainer } from './\bGeneralStyle';
+import Header from './Header';
+import axios from 'axios';
+import { AuthContext } from '../AuthContext';
 
 const FormContainer = styled.form`
+    margin: 50px;
     background-color: #FFE6B8;
     padding: 30px;
     border-radius: 10px;
@@ -50,6 +54,7 @@ const Button = styled.button`
 `;
 
 const LoginPage = () => {
+    const { login } = useContext(AuthContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -61,8 +66,13 @@ const LoginPage = () => {
     const handleLogin = (e) => {
         e.preventDefault();
         if (isFormValid()) {
-            // 로그인 처리 로직 추가
+            axios.post('/login', {
+                username: email,
+                password: password
+            })
+            login('정윤성', '약사');
             alert('로그인 성공!');
+            navigate('/');
         } else {
             alert('이메일과 비밀번호를 입력해주세요.');
         }
@@ -70,6 +80,7 @@ const LoginPage = () => {
 
     return (
         <MainContainer>
+            <Header/>
             <FormContainer onSubmit={handleLogin}>
                 <FormTitle>로그인</FormTitle>
                 <Input
