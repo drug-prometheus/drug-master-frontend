@@ -8,21 +8,24 @@ import LoginPage from './Components/LoginPage';
 import OpinionPage from './Components/OpinionPage';
 import DrugAnalysisPage from './Components/DrugAnalysisPage';
 import IntroductionPage from './Components/IntroductionPage';
+import { AuthProvider } from './AuthContext';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/search" element={<SearchDrugPage />} />
-        <Route path="/opinion" element={<PharmacistOpinionPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/analysis" element={<DrugAnalysisPage /> } />
-        <Route path="/opinion/user" element={<OpinionPage />} />
-        <Route path="/introduction" element={<IntroductionPage />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/search" element={<SearchDrugPage />} />
+          <Route path="/opinion" element={<PharmacistOpinionPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/analysis" element={<DrugAnalysisPage /> } />
+          <Route path="/opinion/user" element={<OpinionPage />} />
+          <Route path="/introduction" element={<IntroductionPage />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 
