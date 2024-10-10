@@ -6,6 +6,7 @@ import Header from './Header';
 import SearchBar from './SearchBar';
 import { MainContainer, MainBlock } from './\bGeneralStyle';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const ContentContainer = styled.div`
   display: flex;
@@ -162,6 +163,17 @@ const MainPage = () => {
     setImage(URL.createObjectURL(e.target.files[0]));
   };
 
+  const sendPillInfoToServer = () => {
+    axios.post('/add-medicine-info', {
+      patient: '정윤성',
+      medicine_name: '알약'
+    })
+    .then(response => {
+      console.log(response.data);
+      alert("성공적으로 요청 했습니다.\n7~14일 안에 소견을 확인할 수 있습니다.");
+    });
+    }
+
   return (
     <MainContainer>
       <Header />
@@ -206,7 +218,7 @@ const MainPage = () => {
                 </DrugItem>
               ))}
             </DrugList>
-            <AskPharmacistButton onClick={() => {alert("성공적으로 요청 했습니다.\n7~14일 안에 소견을 확인할 수 있습니다.");}}>약사 소견 묻기</AskPharmacistButton>
+            <AskPharmacistButton onClick={sendPillInfoToServer}>약사 소견 묻기</AskPharmacistButton>
           </DrugInfoBlock>
         </RightSection>
       </ContentContainer>
