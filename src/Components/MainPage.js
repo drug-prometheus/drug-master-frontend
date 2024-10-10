@@ -1,12 +1,13 @@
 // 메인 페이지. 웹 사이트 홈 화면
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import Header from './Header';
 import SearchBar from './SearchBar';
 import { MainContainer, MainBlock } from './\bGeneralStyle';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { AuthContext } from '../AuthContext';
 
 const ContentContainer = styled.div`
   display: flex;
@@ -141,7 +142,42 @@ const AskPharmacistButton = styled.button`
   font-weight: bold;
 `;
 
+
+const loginedPatient = (auth, logout) => {
+  return (
+    <WelcomeBlock>
+            <p><strong>auth.username</strong> 님</p>
+            <p>환영합니다.</p>
+            <InfoButton onClick={logout}>로그아웃</InfoButton>
+    </WelcomeBlock>
+  );
+}
+
+const loginedPharmacist = (auth, logout) => {
+  return (
+    <WelcomeBlock>
+            <p><strong>{auth.username}</strong> 약사님</p>
+            <p>환영합니다.</p>
+            <InfoButton onClick={logout}>로그아웃</InfoButton>
+    </WelcomeBlock>
+  );
+}
+
+const unlogined = (navigate) => {
+  return (
+    <WelcomeBlock>
+            <InfoButton onClick={()=>navigate('/login')}>로그인</InfoButton>
+    </WelcomeBlock>
+  );
+}
+
+const unloginedEvent = (navigate) => {
+  alert("로그인 후 이용하실 수 있습니다.");
+  navigate('/login');
+}
+
 const MainPage = () => {
+  const { auth, logout } = useContext(AuthContext);
   const [queryInput, setQueryInput] = useState('');
   const [drugInfo, setDrugInfo] = useState(['A 약물', 'B 약물', 'C 약물']);
   const [newDrug, setNewDrug] = useState('');
@@ -159,13 +195,14 @@ const MainPage = () => {
     }
   };
 
+
   const handleImageUpload = (e) => {
     setImage(URL.createObjectURL(e.target.files[0]));
   };
 
   const sendPillInfoToServer = () => {
-    axios.post('/add-medicine-info', {
-      patient: '정윤성',
+    axios.post('/add-medicine-info/', {
+      patient: auth.username,
       medicine_name: '알약'
     })
     .then(response => {
@@ -173,6 +210,34 @@ const MainPage = () => {
       alert("성공적으로 요청 했습니다.\n7~14일 안에 소견을 확인할 수 있습니다.");
     });
     }
+
+  const buttonGroup = ()=>{
+    if (auth.userType == '약사'){
+      return (
+        <ButtonGroup>
+          <InfoButton onClick={()=>{
+            navigate("/opinion");
+          }}>소견 작성</InfoButton>
+        </ButtonGroup>
+      )
+    } else {
+      return (
+        <ButtonGroup>
+        <InfoButton onClick={()=>{
+          if (auth.username == null)
+            unloginedEvent(navigate);
+          else
+            navigate("/opinion/user");}}>약사 소견 보기</InfoButton>
+         <InfoButton onClick={()=>{
+          if (auth.username == null)
+            unloginedEvent(navigate);
+          else
+            navigate("/analysis");}}>약물 분석 확인</InfoButton>
+        </ButtonGroup>
+      );
+    }
+   
+  }
 
   return (
     <MainContainer>
@@ -195,18 +260,26 @@ const MainPage = () => {
               onChange={handleDrugChange} 
               placeholder="새 약물 입력" 
             />
-            <UploadButton onClick={handleAddDrug}>추가</UploadButton>
+            <UploadButton onClick={()=>{
+              if (auth.username == null)
+                unloginedEvent(navigate);
+              else
+              handleAddDrug();
+              }}>추가</UploadButton>
           </DrugInputBlock>
         </LeftSection>
         <RightSection>
-          <WelcomeBlock>
-            <p><strong>홍길동</strong> 님</p>
-            <p>환영합니다.</p>
-          </WelcomeBlock>
-          <ButtonGroup>
-            <InfoButton onClick={()=>{navigate("/opinion/user")}}>약사 소견 보기</InfoButton>
-            <InfoButton onClick={()=>{navigate("/analysis")}}>약물 분석 확인</InfoButton>
-          </ButtonGroup>
+          {auth.userType == null ? (
+              unlogined(navigate)):(
+                auth.userType == '약사' ?
+                loginedPharmacist(auth, logout):
+                loginedPatient(auth, logout)
+              )}
+          
+            {
+              buttonGroup() 
+            }
+          
           <DrugInfoBlock>
             <h3>약물 정보 보기</h3>
             <p>홍길동님은 현재 아래 약물을 복용 중입니다:</p>
@@ -218,7 +291,12 @@ const MainPage = () => {
                 </DrugItem>
               ))}
             </DrugList>
-            <AskPharmacistButton onClick={sendPillInfoToServer}>약사 소견 묻기</AskPharmacistButton>
+            <AskPharmacistButton onClick={()=>{
+              if (auth.username == null)
+                unloginedEvent(navigate);
+              else 
+                sendPillInfoToServer();
+            }}>약사 소견 묻기</AskPharmacistButton>
           </DrugInfoBlock>
         </RightSection>
       </ContentContainer>
