@@ -310,14 +310,17 @@ const MainPage = () => {
           </DrugInputBlock>
         </LeftSection>
         <RightSection>
-          {auth.userType == null ? (
-              unlogined(navigate)):(
-                auth.userType == '약사' ?
-                loginedPharmacist(auth, logout):
-                loginedPatient(auth, logout)
-              )}
-          
-            {buttonGroup()}
+          {
+            auth.userType == null ? 
+            (unlogined(navigate)):
+            (
+              auth.userType == '약사' ?
+              loginedPharmacist(auth, logout):
+              loginedPatient(auth, logout)
+            )
+          }
+        
+          {buttonGroup()}
           
           {pillInfoBlock()}
           
