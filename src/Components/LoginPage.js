@@ -69,9 +69,16 @@ const LoginPage = () => {
             axios.post('/login', {
                 username: email,
                 password: password
-            })
-            login('정윤성', '약사');
-            alert('로그인 성공!');
+            });
+            let type = '';
+
+            if (email.charAt(0) == 'p'){
+                type = '환자';
+            } else {    
+                type = '약사';
+            }
+            login('정윤성', type);
+            alert(type + ' 로그인 성공!');
             navigate('/');
         } else {
             alert('이메일과 비밀번호를 입력해주세요.');
