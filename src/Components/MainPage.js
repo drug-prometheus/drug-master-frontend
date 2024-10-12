@@ -4,7 +4,7 @@ import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import Header from './Header';
 import SearchBar from './SearchBar';
-import { MainContainer, MainBlock } from './\bGeneralStyle';
+import { MainContainer, MainBlock } from './MainStyle';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../AuthContext';
