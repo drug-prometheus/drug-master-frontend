@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { MainBlock, MainContainer } from './\bGeneralStyle';
+import { MainBlock, MainContainer } from './MainStyle';
 import Header from './Header';
 import './IntroductionPage.css';
 

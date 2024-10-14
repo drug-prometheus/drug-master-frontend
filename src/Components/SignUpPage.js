@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { MainContainer } from './\bGeneralStyle';
+import { MainContainer } from './MainStyle';
 
 const FormContainer = styled.form`
     background-color: #FFE6B8;

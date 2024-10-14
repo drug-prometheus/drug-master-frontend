@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import Header from './Header';
 import SearchBar from './SearchBar';
-import { MainContainer } from './\bGeneralStyle';
+import { MainContainer, Block } from './MainStyle';
 
 const DrugInfoContainer = styled.div`
   width: 100%;

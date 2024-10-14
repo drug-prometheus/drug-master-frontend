@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { MainContainer } from './\bGeneralStyle';
+import { MainContainer, Block } from './MainStyle';
 import Header from './Header';
 import axios from 'axios';
 import { AuthContext } from '../AuthContext';

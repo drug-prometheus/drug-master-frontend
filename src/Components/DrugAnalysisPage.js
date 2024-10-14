@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import styled from 'styled-components';
 import Header from './Header';
-import { MainContainer, SearchBar, SearchInput, SearchButton } from './\bGeneralStyle';
+import { MainContainer, SearchBar, SearchInput, SearchButton } from './MainStyle';
 import { useNavigate } from 'react-router-dom';
 
 const ContentContainer = styled.div`
