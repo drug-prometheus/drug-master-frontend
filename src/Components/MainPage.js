@@ -9,76 +9,76 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../AuthContext';
 
-const ContentContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 90%;
-  max-width: 1600px;
+
+// 전체 메인 페이지 스타일 조정
+const MainPageContainer = styled(MainContainer)`
+  max-width: 1200px; /* 최대 너비 설정 */
+  margin: 0 auto; /* 중앙 정렬 */
+  overflow: hidden; /* 내용이 넘치지 않도록 설정 */
 `;
 
+// 내용 컨테이너
+const ContentContainer = styled.div`
+  padding: 10px;
+    display: flex; /* 두 개의 섹션을 나란히 배치 */
+    margin-top: 20px; /* 위쪽 여백 */
+`;
+
+// 왼쪽 섹션
 const LeftSection = styled.div`
   flex: 2;
-  margin-right: 20px;
+  margin-right: 20px; // 마진 조정
 `;
 
+// 오른쪽 섹션
 const RightSection = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 `;
 
-const Block = styled.div`
-  background-color: #FFE6B8;
-  padding: 20px;
-  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
-  border-radius: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-`;
+
 
 const AIAnalysisBlock = styled(Block)`
-    display: flex;
-    flex-direction: column;
-    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
-    align-items: center;
-    justify-content: center;
-    height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 450px;
 `;
 
 const UploadButton = styled.button`
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #FCAB16;
-  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
+  background-color: #FF6F61; // 산호색 버튼
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
+  padding: 12px 24px;
   cursor: pointer;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 18px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #FF4A3D; // 호버 색상
+  }
 `;
 
 const DrugInputBlock = styled(Block)`
   text-align: center;
-  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
-  font-size: 30px;
 `;
 
 const DrugInputField = styled.input`
   width: 80%;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  outline: none;
-  margin-right: 10px;
-  font-size: 20px;
+    padding: 10px; /* 패딩 조정 */
+    margin-top: 10px; /* 위 여백 조정 */
+    border-radius: 5px; /* 둥근 모서리 */
+    border: 2px solid #eaeaea;
+    outline: none;
+    font-size: 16px; /* 폰트 크기 조정 */
 `;
 
 const WelcomeBlock = styled(Block)`
   text-align: center;
-  font-size: 20px;
+  font-size: 22px;
 `;
 
 const ButtonGroup = styled.div`
@@ -88,23 +88,26 @@ const ButtonGroup = styled.div`
 
 const InfoButton = styled.button`
   flex: 1;
-  padding: 10px;
-  color: #FFFFFF;
-  background-color: #FCAB16;
-  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  padding: 12px;
+  background-color: #FF6F61;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
   margin: 0 10px;
-  font-size: 25px;
+  font-size: 18px;
   font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+  
+  &:hover {
+    background-color: #FF4A3D;
+    transform: scale(1.05);
+  }
 `;
 
 const DrugInfoBlock = styled(Block)`
-  flex: 1;
-  margin-top: 20px;
-  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
-  font-size: 20px;
+  font-size: 18px;
+  padding: 25px;
 `;
 
 const DrugList = styled.ul`
@@ -116,7 +119,7 @@ const DrugList = styled.ul`
 const DrugItem = styled.li`
   margin-bottom: 10px;
   padding: 10px;
-  background-color: #FFE6B8;
+  background-color: #F7F9FC;
   box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   display: flex;
@@ -128,25 +131,16 @@ const DrugIcon = styled.div`
   font-size: 20px;
 `;
 
-const AskPharmacistButton = styled.button`
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #FCAB16;
-  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
+const AskPharmacistButton = styled(UploadButton)`
+  background-color: #FF6F61; // 일관된 버튼 색상
   width: 100%;
-  font-size: 20px;
-  font-weight: bold;
 `;
 
 
 const loginedPatient = (auth, logout) => {
   return (
     <WelcomeBlock>
-            <p><strong>auth.username</strong> 님</p>
+            <p><strong>{auth.username}</strong> 님</p>
             <p>환영합니다.</p>
             <InfoButton onClick={logout}>로그아웃</InfoButton>
     </WelcomeBlock>
@@ -215,7 +209,7 @@ const MainPage = () => {
   const pillInfoBlock = ()=>{
     if (auth.userType == '약사'){
       return (
-        <DrugInfoBlock>
+        <Block>
           <h3>요청 소견 보기</h3>
           <p>소견 요청한 환자는 다음과 같습니다 :</p>
           <DrugList>
@@ -228,7 +222,7 @@ const MainPage = () => {
               </DrugItem>
             ))}
           </DrugList>
-        </DrugInfoBlock>
+        </Block>
         );
     }else
       return (
@@ -281,14 +275,14 @@ const MainPage = () => {
   }
 
   return (
-    <MainContainer>
-      <Header />
+    <MainPageContainer>
+    <Header />
       <MainBlock>
       <SearchBar queryInput={queryInput} setQueryInput={setQueryInput} handleSearch={()=>{}} handleQueryChange={()=>{}} style={{width: "100%"}}/>
       <ContentContainer>
         <LeftSection>
           <AIAnalysisBlock>
-            <p style={{fontSize: '40px', marginBottom: '0px'}}><strong>AI 약물 정보 분석</strong></p>
+            <h2 style={{fontSize: '30px'}}>AI 약물 정보 분석</h2>
             <p style={{fontSize: '30px'}}>사진을 끌어다 놓거나 업로드 하세요</p>
             <input style={{fontSize: '30px'}} type="file" accept="image/*" onChange={handleImageUpload} />
             {image && <img src={image} alt="Uploaded" style={{ marginTop: '20px', width: '100%', maxWidth: '250px', borderRadius: '10px' }} />}
@@ -319,6 +313,7 @@ const MainPage = () => {
               loginedPatient(auth, logout)
             )
           }
+          
         
           {buttonGroup()}
           
@@ -327,7 +322,7 @@ const MainPage = () => {
         </RightSection>
       </ContentContainer>
       </MainBlock>
-    </MainContainer>
+    </MainPageContainer>
   );
 };
 

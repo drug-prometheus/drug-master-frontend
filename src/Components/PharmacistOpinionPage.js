@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Header from './Header';
-import { MainContainer } from './MainStyle';
+import { MainContainer, Block } from './MainStyle';
 
 const ContentContainer = styled.div`
     display: flex;
@@ -14,9 +14,9 @@ const ContentContainer = styled.div`
     margin-top: 30px;
 `;
 
-const PatientListContainer = styled.div`
+const PatientListContainer = styled(Block)`
     width: 200px;
-    background-color: #FFFCF5;
+
     border-radius: 10px;
     padding: 20px;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
@@ -26,24 +26,24 @@ const PatientListContainer = styled.div`
 const PatientTitle = styled.h2`
     font-size: 25px;
     margin-bottom: 20px;
+    color: #003366; /* 진한 파란색 */
 `;
 
 const PatientItem = styled.div`
     margin-bottom: 10px;
     padding: 10px;
-    background-color: #FFFCF5;
+    background-color: #E6F7FF; /* 연한 파란색 */
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     cursor: pointer;
 
     &:hover {
-        background-color: #e9e9e9;
+        background-color: #B3E0FF; /* 중간 파란색 */
     }
 `;
 
-const NoteContainer = styled.div`
-    flex: 1;
-    background-color: #FFE6B8;
+const NoteContainer = styled(Block)`
+    flex: 3.5;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
@@ -53,6 +53,7 @@ const NoteContainer = styled.div`
 const NoteTitle = styled.h2`
     font-size: 30px;
     margin-bottom: 20px;
+    color: #003366; /* 진한 파란색 */
 `;
 
 const NoteContent = styled.textarea`
@@ -61,10 +62,10 @@ const NoteContent = styled.textarea`
     font-size: 16px;
     border-radius: 10px;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
-    border: 1px solid #ddd;
+    border: 1px solid #B3D9FF; /* 연한 파란색 */
     outline: none;
     resize: none;
-    background-color: ${(props) => (props.editable ? '#FFFCF5' : '#FFFCF5')};
+    background-color: ${(props) => (props.editable ? '#E6F7FF' : '#E6F7FF')}; /* 연한 파란색 */
     pointer-events: ${(props) => (props.editable ? 'auto' : 'none')};
 `;
 
@@ -78,7 +79,7 @@ const ButtonContainer = styled.div`
 const EditButton = styled.button`
     font-size: 20px;
     padding: 10px 20px;
-    background-color: #FCAB16;
+    background-color: #007BFF; /* 파란색 */
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
     color: white;
     border: none;
@@ -89,13 +90,14 @@ const EditButton = styled.button`
 const SaveButton = styled.button`
     font-size: 20px;
     padding: 10px 20px;
-    background-color: #FCAB16;
+    background-color: #007BFF; /* 파란색 */
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
-    color: black;
+    color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
 `;
+
 
 const PharmacistOpinionPage = () => {
     const [selectedPatient, setSelectedPatient] = useState(null);
@@ -167,9 +169,7 @@ const PharmacistOpinionPage = () => {
                     onChange={handleNoteChange}
                     editable={isEditable}
                 />
-            </NoteContainer>
-        </ContentContainer>
-        {selectedPatient && (
+                        {selectedPatient && (
             <ButtonContainer>
             <EditButton onClick={handleEditClick}>
                 약사 소견 입력
@@ -181,7 +181,9 @@ const PharmacistOpinionPage = () => {
             )}
             </ButtonContainer>
         )}
-        
+            </NoteContainer>
+        </ContentContainer>
+
     </MainContainer>
     );
 };

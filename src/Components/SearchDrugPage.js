@@ -12,10 +12,12 @@ const DrugInfoContainer = styled.div`
   margin-top: 20px;
 `;
 
-const DrugCard = styled.div`
+const DrugCard = styled(Block)`
   display: flex;
-  background-color: #FFE6B8;
+  background-color: #F7F9FC; /* 연한 파란색 */
+  width: 90%;
   padding: 15px;
+  margin: auto;
   border-radius: 15px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-bottom: 15px;
@@ -37,6 +39,7 @@ const DrugInfo = styled.div`
 const DrugName = styled.h3`
   margin: 0;
   font-size: 18px;
+  color: #003366; /* 진한 파란색 */
 `;
 
 const DrugDescription = styled.p`

@@ -6,14 +6,28 @@ import Header from './Header';
 import axios from 'axios';
 import { AuthContext } from '../AuthContext';
 
+const LoginMainContainer = styled(MainContainer)`
+        align-items: center; /* 중앙 정렬 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    height: 100vh; /* 전체 화면 높이를 차지 */
+`
+
+const LoginBlock = styled(Block)`
+    margin: 50px auto;
+    width: 50%; /* 블록 너비를 100%로 설정 */
+    align-items: center; /* 중앙 정렬 */
+    justify-content: center; /* 수평 중앙 정렬 */
+
+`;
+
 const FormContainer = styled.form`
     margin: 50px;
-    background-color: #FFE6B8;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
     width: 400px;
     display: flex;
+        align-items: center; /* 중앙 정렬 */
+    justify-content: center; /* 수평 중앙 정렬 */
     flex-direction: column;
     gap: 15px;
 `;
@@ -39,7 +53,7 @@ const Button = styled.button`
     font-size: 20px;
     font-weight: bold;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
-    background-color: #FCAB16;
+    background-color: #4A90E2; // 메인 페이지 버튼 색상
     color: white;
     border: none;
     border-radius: 5px;
@@ -47,10 +61,15 @@ const Button = styled.button`
     margin-top: 20px;
 
     &:disabled {
-        background-color: #FFFCF5;
+        background-color: #FFFCF5; // 비활성화 상태 색상
         color: #000000;
         cursor: not-allowed;
     }
+    &:hover {
+        
+        transform: translateY(-2px); /* 호버 시 약간의 상승 효과 */
+    }
+
 `;
 
 const LoginPage = () => {
@@ -86,8 +105,9 @@ const LoginPage = () => {
     };
 
     return (
-        <MainContainer>
+        <LoginMainContainer>
             <Header/>
+            <LoginBlock>
             <FormContainer onSubmit={handleLogin}>
                 <FormTitle>로그인</FormTitle>
                 <Input
@@ -108,7 +128,8 @@ const LoginPage = () => {
                     로그인
                 </Button>
             </FormContainer>
-        </MainContainer>
+            </LoginBlock>
+        </LoginMainContainer>
     );
 };
 

@@ -17,7 +17,7 @@ const ContentContainer = styled.div`
 const DateListContainer = styled.div`
     width: 200px;
     height: 300px; 
-    background-color: #FFFCF5;
+    background-color: #E3F2FD; /* 연한 파란색 */
     border-radius: 10px;
     padding: 20px;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
@@ -28,24 +28,25 @@ const DateListContainer = styled.div`
 const DateTitle = styled.h2`
     font-size: 25px;
     margin-bottom: 20px;
+    color: #1E88E5; /* 진한 파란색 */
 `;
 
 const DateItem = styled.div`
     margin-bottom: 10px;
     padding: 10px;
-    background-color: #FFFCF5;
+    background-color: #E3F2FD; /* 연한 파란색 */
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     cursor: pointer;
 
     &:hover {
-        background-color: #e9e9e9;
+        background-color: #BBDEFB; /* 중간 파란색으로 변경 */
     }
 `;
 
 const NoteContainer = styled.div`
     flex: 1;
-    background-color: #FFE6B8;
+    background-color: #BBDEFB; /* 중간 파란색 */
     border-radius: 10px;
     padding: 20px;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
@@ -61,9 +62,10 @@ const NoteContent = styled.textarea`
     border: 1px solid #ddd;
     outline: none;
     resize: none;
-    background-color: #FFFCF5;
-    pointer-events: none;
+    background-color: #FFFCF5; /* 기존 색상 유지 */
+    pointer-events: none; /* 수정 불가 */
 `;
+
 
 const OpinionPage = () => {
     const [noteContent, setNoteContent] = useState('');
