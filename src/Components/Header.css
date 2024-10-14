@@ -28,6 +28,11 @@
   height: 50px;
   font-size: 1.5rem;
   font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.logo :hover {
+  transform: scale(1.05);
 }
 
 .nav-menu ul {
@@ -45,11 +50,12 @@
   color: #fff;
   text-decoration: none;
   font-size: 1rem;
-  transition: color 0.3s ease;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .nav-menu a:hover {
-  color: #FCAB16; /* 호버 색상 */
+  color: #F0F0F0; /* 호버 색상 */
+  transform: scale(1.05);
 }
 
 /* 반응형 디자인 */
