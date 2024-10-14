@@ -148,8 +148,6 @@ const SearchDrugPage = () => {
               ))}
           </DrugInfoContainer>
         );
-      } else {
-        return <div>해당 약물이 없습니다.</div>;
       }
   };
 
