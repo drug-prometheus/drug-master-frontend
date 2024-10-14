@@ -78,12 +78,16 @@ const DrugInputField = styled.input`
 
 const WelcomeBlock = styled(Block)`
   text-align: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   font-size: 22px;
 `;
 
 const ButtonGroup = styled.div`
   display: flex;
   justify-content: space-around;
+  margin: 10px;
 `;
 
 const InfoButton = styled.button`
@@ -160,6 +164,7 @@ const loginedPharmacist = (auth, logout) => {
 const unlogined = (navigate) => {
   return (
     <WelcomeBlock>
+            <p>로그인이 필요합니다. </p>
             <InfoButton onClick={()=>navigate('/login')}>로그인</InfoButton>
     </WelcomeBlock>
   );
@@ -189,7 +194,6 @@ const MainPage = () => {
       setNewDrug('');
     }
   };
-
 
   const handleImageUpload = (e) => {
     setImage(URL.createObjectURL(e.target.files[0]));
@@ -262,7 +266,7 @@ const MainPage = () => {
           if (auth.username == null)
             unloginedEvent(navigate);
           else
-            navigate("/opinion/user");}}>약사 소견 보기</InfoButton>
+            navigate("/opinionUser");}}>약사 소견 보기</InfoButton>
          <InfoButton onClick={()=>{
           if (auth.username == null)
             unloginedEvent(navigate);
@@ -313,12 +317,8 @@ const MainPage = () => {
               loginedPatient(auth, logout)
             )
           }
-          
-        
           {buttonGroup()}
-          
           {pillInfoBlock()}
-          
         </RightSection>
       </ContentContainer>
       </MainBlock>
