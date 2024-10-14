@@ -22,11 +22,11 @@ const IntroductionPage = () => {
       <Section className="evenSection" title="주체">
         <div className='subjectContainer'>
           <div className='subjectItem'>
-            <img src='국민건강보험.png' style={{ width: '300px', height: '150px', background: '#FFFFFF', borderStyle: 'solid', borderColor: '#000000', borderWidth: '2px'}}/>
+            <img src='subject1.png' style={{ width: '300px', height: '150px', background: '#FFFFFF', borderStyle: 'solid', borderColor: '#000000', borderWidth: '2px'}}/>
             <div>국민건강보험공단</div>
           </div>
           <div className='subjectItem'>
-            <img src='대한약사회.png' style={{ width: '300px', height: '150px', background: '#FFFFFF', borderStyle: 'solid', borderColor: '#000000', borderWidth: '0.5px'}}/>
+            <img src='subject2.png' style={{ width: '300px', height: '150px', background: '#FFFFFF', borderStyle: 'solid', borderColor: '#000000', borderWidth: '0.5px'}}/>
             <div>대한약사회</div>
           </div>
         </div>
