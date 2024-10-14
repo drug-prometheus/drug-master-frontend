@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header';
-import { MainContainer } from './MainStyle';
+import { MainContainer, Block } from './MainStyle';
 
 const ContentContainer = styled.div`
     display: flex;
@@ -14,9 +14,10 @@ const ContentContainer = styled.div`
     margin-top: 30px;
 `;
 
-const DateListContainer = styled.div`
+const DateListContainer = styled(Block)`
     width: 200px;
     height: 300px; 
+    flex: 1;
     background-color: #E3F2FD; /* 연한 파란색 */
     border-radius: 10px;
     padding: 20px;
@@ -44,8 +45,8 @@ const DateItem = styled.div`
     }
 `;
 
-const NoteContainer = styled.div`
-    flex: 1;
+const NoteContainer = styled(Block)`
+    flex: 3;
     background-color: #BBDEFB; /* 중간 파란색 */
     border-radius: 10px;
     padding: 20px;
