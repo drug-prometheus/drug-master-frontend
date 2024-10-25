@@ -1,48 +1,34 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { MainBlock, MainContainer } from './MainStyle';
+import React from 'react';
+import { MainContainer } from './MainStyle';
 import Header from './Header';
 import './IntroductionPage.css';
 
 const IntroductionPage = () => {
   return (
     <MainContainer>
-        
-      {/* 헤더 섹션 */}
       <Header />
-                    
-      {/* 사업 소개 섹션 */}
       <Section className="oddSection" title="사업 소개">
         <SubTitle title="다제약물 관리사업" />
         <DescriptionBlock />
       </Section>
-
-      {/* 주체 섹션 */}
       <Section className="evenSection" title="주체">
         <div className='subjectContainer'>
           <div className='subjectItem'>
-            <img src='subject1.png' style={{ width: '300px', height: '150px', background: '#FFFFFF', borderStyle: 'solid', borderColor: '#000000', borderWidth: '2px'}}/>
+            <img src='subject1.png' alt='국민건강보험공단' style={{ width: '300px', height: '150px', background: '#FFFFFF', borderStyle: 'solid', borderColor: '#000000', borderWidth: '2px'}}/>
             <div>국민건강보험공단</div>
           </div>
           <div className='subjectItem'>
-            <img src='subject2.png' style={{ width: '300px', height: '150px', background: '#FFFFFF', borderStyle: 'solid', borderColor: '#000000', borderWidth: '0.5px'}}/>
+            <img src='subject2.png' alt='대한약사회' style={{ width: '300px', height: '150px', background: '#FFFFFF', borderStyle: 'solid', borderColor: '#000000', borderWidth: '0.5px'}}/>
             <div>대한약사회</div>
           </div>
         </div>
       </Section>
-
-      {/* 대상 섹션 */}
       <Section className="oddSection" title="대상">
         <TargetSection />
       </Section>
-
-      {/* 방식 섹션 */}
       <Section className="evenSection" title="방식">
         <MethodSection />
       </Section>
-
-      {/* 특징 섹션 */}
       <Section className="oddSection" title="특징">
         <Features />
       </Section>
@@ -50,7 +36,6 @@ const IntroductionPage = () => {
   );
 };
 
-// Section 컴포넌트 (공통 섹션 레이아웃)
 const Section = ({ className, title, children }) => (
   <div className={className}>
     <h2>{title}</h2>
@@ -58,12 +43,10 @@ const Section = ({ className, title, children }) => (
   </div>
 );
 
-// SubTitle 컴포넌트
 const SubTitle = ({ title }) => (
   <h3 className='subTitle'>{title}</h3>
 );
 
-// DescriptionBlock 컴포넌트 (사업 소개 설명)
 const DescriptionBlock = () => (
   <div className='descriptionBlock'>
     <div className='descriptionItem'>
@@ -90,7 +73,6 @@ const DescriptionBlock = () => (
   </div>
 );
 
-// TargetSection 컴포넌트 (대상 섹션)
 const TargetSection = () => (
   <div className='targetSection'>
     <div className='targetItem'>건강보험 가입자</div>
@@ -101,7 +83,6 @@ const TargetSection = () => (
   </div>
 );
 
-// MethodSection 컴포넌트 (방식 섹션)
 const MethodSection = () => (
   <div className='methodSection'>
     <div className='methodItem'>
@@ -123,7 +104,6 @@ const MethodSection = () => (
   </div>
 );
 
-// Features 컴포넌트 (특징 섹션)
 const Features = () => (
   <div className='featureSection'>
     <div className='featureItem'>
