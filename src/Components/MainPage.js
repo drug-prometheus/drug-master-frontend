@@ -15,15 +15,18 @@ import DrugInputBlock from './MainPageComponents/DrugInputBlock'
 import axios from 'axios';
 
 const MainPageContainer = styled(MainContainer)`
-  max-width: 1200px;
-  margin: 0 auto;
   overflow: hidden;
+`;
+
+const MainPageMainBlock = styled(MainBlock)`
+  margin: 100px;
+  margin-top: 0px;
 `;
 
 const ContentContainer = styled.div`
   padding: 10px;
-    display: flex;
-    margin-top: 20px;
+  display: flex;
+  margin-top: 20px;
 `;
 
 const LeftSection = styled.div`
@@ -72,7 +75,7 @@ const MainPage = () => {
   return (
     <MainPageContainer>
     <Header />
-      <MainBlock>
+      <MainPageMainBlock>
       <SearchBar queryInput={queryInput} setQueryInput={setQueryInput} handleSearch={()=>{}} handleQueryChange={()=>{}} style={{width: "100%"}}/>
       <ContentContainer>
         <LeftSection>
@@ -85,7 +88,7 @@ const MainPage = () => {
           <PillInfoBlock auth={auth} unloginedEvent={unloginedEvent} drugInfo={drugInfo}></PillInfoBlock>
         </RightSection>
       </ContentContainer>
-      </MainBlock>
+      </MainPageMainBlock>
     </MainPageContainer>
   );
 };
