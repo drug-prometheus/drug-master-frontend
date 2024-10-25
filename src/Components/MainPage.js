@@ -208,7 +208,7 @@ const MainPage = () => {
     }
 
   const pillInfoBlock = ()=>{
-    if (auth.userType == '약사'){
+    if (auth.userType === '약사'){
       return (
         <Block>
           <h3>요청 소견 보기</h3>
@@ -239,7 +239,7 @@ const MainPage = () => {
           ))}
         </DrugList>
         <AskPharmacistButton onClick={()=>{
-          if (auth.username == null)
+          if (auth.username === null)
             unloginedEvent(navigate);
           else 
             sendPillInfoToServer();
@@ -248,7 +248,7 @@ const MainPage = () => {
   };
 
   const buttonGroup = ()=>{
-    if (auth.userType == '약사'){
+    if (auth.userType === '약사'){
       return (
         <ButtonGroup>
           <InfoButton onClick={()=>{
@@ -260,12 +260,12 @@ const MainPage = () => {
       return (
         <ButtonGroup>
         <InfoButton onClick={()=>{
-          if (auth.username == null)
+          if (auth.username === null)
             unloginedEvent(navigate);
           else
             navigate("/opinionUser");}}>약사 소견 보기</InfoButton>
          <InfoButton onClick={()=>{
-          if (auth.username == null)
+          if (auth.username === null)
             unloginedEvent(navigate);
           else
             navigate("/analysis");}}>약물 분석 확인</InfoButton>
@@ -297,7 +297,7 @@ const MainPage = () => {
               placeholder="새 약물 입력" 
             />
             <UploadButton onClick={()=>{
-              if (auth.username == null)
+              if (auth.username === null)
                 unloginedEvent(navigate);
               else
               handleAddDrug();
@@ -306,10 +306,10 @@ const MainPage = () => {
         </LeftSection>
         <RightSection>
           {
-            auth.userType == null ? 
+            auth.userType === null ? 
             (unlogined(navigate)):
             (
-              auth.userType == '약사' ?
+              auth.userType === '약사' ?
               loginedPharmacist(auth, logout):
               loginedPatient(auth, logout)
             )
