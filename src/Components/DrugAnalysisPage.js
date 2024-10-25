@@ -2,14 +2,6 @@ import React, { useState, useEffect } from "react"
 import styled from 'styled-components';
 import Header from './Header';
 import { MainContainer, Block} from './MainStyle';
-import { useNavigate } from 'react-router-dom';
-
-const ContentContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 90%;
-  max-width: 1600px;
-`;
 
 const MainBlock = styled(Block)`
     width: 80%;
