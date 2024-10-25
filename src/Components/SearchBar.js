@@ -38,21 +38,26 @@ const SearchButton = styled.button`
 `;
 
 function SearchBar({ queryInput, setQueryInput, handleSearch, handleQueryChange}) {
-    const navigate = useNavigate();      
+  const navigate = useNavigate();      
 
-      const searchDrug = () => {
-        console.log("button down");
-        navigate(((queryInput==='')? '/search' : '/search?query=' + queryInput));
-      };
+  const searchDrug = () => {
+    console.log("button down");
+    navigate(((queryInput==='')? '/search' : '/search?query=' + queryInput));
+  };
 
-    return (
-        <SearchContainer>
-            <SearchInput value={queryInput} onChange={(e)=>{ setQueryInput(e.target.value); handleQueryChange(e);}} 
-                     placeholder="약 이름을 검색하세요" />
-            <SearchButton onClick={()=>{searchDrug(); handleSearch();}}>🔍</SearchButton>
-            
-        </SearchContainer>
-      );
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+        searchDrug();
+        handleSearch();
+    }
+  };
+  return (
+    <SearchContainer>
+      <SearchInput value={queryInput} onKeyDown={handleKeyDown} onChange={(e)=>{ setQueryInput(e.target.value); handleQueryChange(e);}} 
+        placeholder="약 이름을 검색하세요" />
+      <SearchButton onClick={()=>{searchDrug(); handleSearch();}}>🔍</SearchButton>
+    </SearchContainer>
+  );
 }
 
 export default SearchBar;
