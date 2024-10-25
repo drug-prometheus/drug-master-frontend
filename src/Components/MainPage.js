@@ -9,8 +9,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../AuthContext';
 
-
-// 전체 메인 페이지 스타일 조정
 const MainPageContainer = styled(MainContainer)`
   max-width: 1200px; /* 최대 너비 설정 */
   margin: 0 auto; /* 중앙 정렬 */
@@ -27,7 +25,7 @@ const ContentContainer = styled.div`
 // 왼쪽 섹션
 const LeftSection = styled.div`
   flex: 2;
-  margin-right: 20px; // 마진 조정
+  margin-right: 20px;
 `;
 
 // 오른쪽 섹션
@@ -36,8 +34,6 @@ const RightSection = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-
 
 const AIAnalysisBlock = styled(Block)`
   display: flex;
@@ -48,7 +44,7 @@ const AIAnalysisBlock = styled(Block)`
 `;
 
 const UploadButton = styled.button`
-  background-color: #FF6F61; // 산호색 버튼
+  background-color: #FF6F61;
   color: white;
   border: none;
   border-radius: 8px;
@@ -58,7 +54,7 @@ const UploadButton = styled.button`
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: #FF4A3D; // 호버 색상
+    background-color: #FF4A3D;
   }
 `;
 
@@ -68,12 +64,12 @@ const DrugInputBlock = styled(Block)`
 
 const DrugInputField = styled.input`
   width: 80%;
-    padding: 10px; /* 패딩 조정 */
-    margin-top: 10px; /* 위 여백 조정 */
-    border-radius: 5px; /* 둥근 모서리 */
+    padding: 10px;
+    margin-top: 10px; 
+    border-radius: 5px;
     border: 2px solid #eaeaea;
     outline: none;
-    font-size: 16px; /* 폰트 크기 조정 */
+    font-size: 16px; 
 `;
 
 const WelcomeBlock = styled(Block)`
@@ -128,6 +124,7 @@ const DrugItem = styled.li`
   border-radius: 10px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 const DrugIcon = styled.div`
