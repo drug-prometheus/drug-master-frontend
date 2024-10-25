@@ -16,7 +16,6 @@ const ContentContainer = styled.div`
 
 const PatientListContainer = styled(Block)`
     width: 200px;
-
     border-radius: 10px;
     padding: 20px;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
@@ -120,7 +119,7 @@ const PharmacistOpinionPage = () => {
       '이영희 님': '이영희 님은 진통제를 복용 중입니다. 추가 진단이 필요합니다.',
       '박지민 님': '박지민 님은 항생제를 복용 중이며, 경과를 지켜봐야 합니다.',
     };
-  
+
     const handlePatientSelect = (patient) => {
         setSelectedPatient(patient);
         setNoteContent(notesFromDB[patient]);
