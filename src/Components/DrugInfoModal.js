@@ -7,7 +7,7 @@ Modal.setAppElement('#root');
 
 const BlackModal = styled(Modal)`
     background-color: #F7F9FC;
-    margin: 20px auto;
+    margin: 40px auto;
     width: 80%;
     height: 80%;
     padding: 20px;
