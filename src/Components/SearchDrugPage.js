@@ -51,7 +51,6 @@ const DrugDescription = styled.p`
 const SearchDrugPage = () => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [queryInput, setQueryInput] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const query = queryParams.get('query');
@@ -151,31 +150,10 @@ const SearchDrugPage = () => {
       }
   };
 
-  const handleSearch = () => {
-    // 여기에 실제 검색 로직을 추가하세요
-    // 검색 결과는 임시로 예시 데이터를 사용합니다
-    const results = [
-      {
-        id: 1,
-        name: '아세트아미노펜',
-        description: '효능: 발열 및 두통, 신경통, 근육통, 월경통, 염좌통 등에 사용.',
-        imageUrl: 'https://via.placeholder.com/80',
-      },
-      {
-        id: 2,
-        name: '이부프로펜',
-        description: '효능: 소염 및 진통 효과로 관절염, 치통, 생리통 등에 사용.',
-        imageUrl: 'https://via.placeholder.com/80',
-      },
-    ];
-    setSearchResults(results);
-  };
-
   useEffect(() => {
     if (query != null){
       setQueryInput(query);
       handleQueryChange(query)
-      // handleSearch();
     }
   }, []);
 
