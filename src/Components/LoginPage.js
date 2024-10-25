@@ -89,13 +89,15 @@ const LoginPage = () => {
             //     password: password
             // });
             let type = '';
-
+            let name = '';
             if (email.charAt(0) === 'p'){
                 type = '환자';
+                name = '정윤성';
             } else {    
                 type = '약사';
+                name = '약사1'
             }
-            login('박'+type, type);
+            login(name, type);//'박'+type, type);
             // alert(type + ' 로그인 성공!');
             navigate('/');
         // } else {
