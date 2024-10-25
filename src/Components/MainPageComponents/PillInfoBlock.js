@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Block } from '../MainStyle';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 const DrugInfoBlock = styled(Block)`
   font-size: 18px;
   padding: 25px;
+  max-height: 400px; 
 `;
 
 const DrugList = styled.ul`
   list-style-type: none;
   padding: 0;
   margin: 20px 0;
+  max-height: 200px; 
+  overflow-y: auto;
 `;
 
 const DrugItem = styled.li`
@@ -43,23 +45,12 @@ const AskPharmacistButton = styled.button`
   width: 100%;
   &:hover {
     background-color: #FF4A3D;
- 
+  }
 `;
 
 const PillInfoBlock = ({auth, unloginedEvent, drugInfo})=>{
     const navigate = useNavigate();
     const [opinionRequest, setOpinionRequest] = useState(['홍길동', '정윤성']);
-
-    const sendPillInfoToServer = () => {
-      axios.post('/add-medicine-info/', {
-        patient: auth.username,
-        medicine_name: '알약'
-      })
-      .then(response => {
-        console.log(response.data);
-        alert("성공적으로 요청 했습니다.\n7~14일 안에 소견을 확인할 수 있습니다.");
-      });
-    };
 
     if (auth.userType === '약사'){
       return (
@@ -84,7 +75,7 @@ const PillInfoBlock = ({auth, unloginedEvent, drugInfo})=>{
         <h3>약물 정보 보기</h3>
         <p>{auth.username}님은 현재 아래 약물을 복용 중입니다:</p>
         <DrugList>
-          {drugInfo.map((drug, index) => (
+          {drugInfo?.map((drug, index) => (
             <DrugItem key={index}>
               <DrugIcon>💊</DrugIcon>
               {drug}
@@ -94,8 +85,6 @@ const PillInfoBlock = ({auth, unloginedEvent, drugInfo})=>{
         <AskPharmacistButton onClick={()=>{
           if (auth.username === null)
             unloginedEvent(navigate);
-          else 
-            sendPillInfoToServer();
         }}>약사 소견 묻기</AskPharmacistButton>
       </DrugInfoBlock>);
   };
