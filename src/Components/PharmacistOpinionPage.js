@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Header from './Header';
 import { MainContainer, Block } from './MainStyle';
 
@@ -104,7 +104,6 @@ const PharmacistOpinionPage = () => {
     const [noteContent, setNoteContent] = useState('');
     const [isEditable, setIsEditable] = useState(false);
     const location = useLocation();
-    const navigate = useNavigate();
 
     // 원래는 DB에서 가져와야 하지만 임시로 적어둠
     const patients = [
