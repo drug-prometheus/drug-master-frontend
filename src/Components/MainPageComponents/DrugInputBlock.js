@@ -42,9 +42,27 @@ const DrugInfoBlock = ({auth, unloginedEvent, drugInfo , setDrugInfo})=>{
 
     const handleAddDrug = () => {
         if (newDrug) {
-            setDrugInfo([...drugInfo, newDrug]);
+            if (!drugInfo){
+                setDrugInfo([newDrug])
+            } else {
+                setDrugInfo([...drugInfo, newDrug]);
+            }
+            sendPillInfoToServer(newDrug);
             setNewDrug('');
         }
+    };
+    
+    const sendPillInfoToServer = (pill_name) => {
+        axios.post('/add-medicine-info/', {
+          patient: auth.username,
+          medicine_name: pill_name
+        })
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch((err)=>{
+            console.error(err);
+        });
     };
 
     return (
