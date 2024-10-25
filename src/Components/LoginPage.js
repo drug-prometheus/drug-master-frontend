@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { MainContainer, Block } from './MainStyle';
 import Header from './Header';
-import axios from 'axios';
 import { AuthContext } from '../AuthContext';
 
 const LoginMainContainer = styled(MainContainer)`
@@ -91,7 +90,7 @@ const LoginPage = () => {
             // });
             let type = '';
 
-            if (email.charAt(0) == 'p'){
+            if (email.charAt(0) === 'p'){
                 type = '환자';
             } else {    
                 type = '약사';
