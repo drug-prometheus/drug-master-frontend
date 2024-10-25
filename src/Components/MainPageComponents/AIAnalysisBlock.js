@@ -1,7 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Block } from '../MainStyle';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const UploadButton = styled.button`
@@ -28,11 +27,29 @@ const AIAnalysisContainer = styled(Block)`
   height: 450px;
 `;
 
-const AIAnalysisBlock = ()=>{
+const AIAnalysisBlock = (auth)=>{
     const [image, setImage] = useState(null);
-
+    const [previewUrl, setPreviewUrl] = useState(null);
     const handleImageUpload = (e) => {
-        setImage(URL.createObjectURL(e.target.files[0]));
+        setImage(e.target.files[0]);
+        setPreviewUrl(URL.createObjectURL(e.target.files[0]));
+    };
+
+    const sendToServer = ()=>{
+        if (!image){
+            alert('이미지를 선택해 주세요.');
+            return;
+        }
+        const formData = new FormData();
+        formData.append('patient', auth.username);
+        formData.append('picture', image)
+        axios.post('/analyzing-medicine/', formData)
+            .then((data)=>{ 
+                console.log(data);
+            })
+            .catch((err)=>{
+                console.error(err);
+            });
     };
 
 
@@ -41,8 +58,8 @@ const AIAnalysisBlock = ()=>{
             <h2 style={{fontSize: '30px'}}>AI 약물 정보 분석</h2>
             <p style={{fontSize: '30px'}}>사진을 끌어다 놓거나 업로드 하세요</p>
             <input style={{fontSize: '30px'}} type="file" accept="image/*" onChange={handleImageUpload} />
-            {image && <img src={image} alt="Uploaded" style={{ marginTop: '20px', width: '100%', maxWidth: '250px', borderRadius: '10px' }} />}
-            <UploadButton>사진 올리기</UploadButton>
+            {image && <img src={previewUrl} alt="Uploaded" style={{ marginTop: '20px', width: '100%', maxWidth: '250px', borderRadius: '10px' }} />}
+            <UploadButton onClick={sendToServer}>사진 올리기</UploadButton>
         </AIAnalysisContainer>
     );
 }
