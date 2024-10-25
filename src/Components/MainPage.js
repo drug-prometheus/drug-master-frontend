@@ -59,7 +59,7 @@ const MainPage = () => {
       <SearchBar queryInput={queryInput} setQueryInput={setQueryInput} handleSearch={()=>{}} handleQueryChange={()=>{}} style={{width: "100%"}}/>
       <ContentContainer>
         <LeftSection>
-          <AIAnalysisBlock></AIAnalysisBlock>
+          <AIAnalysisBlock auth={auth}></AIAnalysisBlock>
           <DrugInputBlock auth={auth} unloginedEvent={unloginedEvent} drugInfo={drugInfo} setDrugInfo={setDrugInfo}></DrugInputBlock>
         </LeftSection>
         <RightSection>
