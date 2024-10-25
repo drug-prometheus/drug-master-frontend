@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 import { MainContainer } from './MainStyle';
 
 const FormContainer = styled.form`
@@ -63,7 +62,6 @@ const SignUpPage = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isStudent, setIsStudent] = useState(false);
     const [studentId, setStudentId] = useState('');
-    const navigate = useNavigate();
 
     const isFormValid = () => {
         if (!name || !email || !password || !confirmPassword) return false;
