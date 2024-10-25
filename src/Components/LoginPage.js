@@ -84,11 +84,11 @@ const LoginPage = () => {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        if (isFormValid()) {
-            axios.post('/login', {
-                username: email,
-                password: password
-            });
+        // if (isFormValid()) {
+            // axios.post('/login', {
+            //     username: email,
+            //     password: password
+            // });
             let type = '';
 
             if (email.charAt(0) == 'p'){
@@ -96,12 +96,12 @@ const LoginPage = () => {
             } else {    
                 type = '약사';
             }
-            login('정윤성', type);
-            alert(type + ' 로그인 성공!');
+            login('박'+type, type);
+            // alert(type + ' 로그인 성공!');
             navigate('/');
-        } else {
-            alert('이메일과 비밀번호를 입력해주세요.');
-        }
+        // } else {
+        //     alert('이메일과 비밀번호를 입력해주세요.');
+        // }
     };
 
     return (
