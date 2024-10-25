@@ -4,15 +4,15 @@ import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import Header from './Header';
 import SearchBar from './SearchBar';
-import { MainContainer, MainBlock, Block } from './MainStyle';
+import { MainContainer, MainBlock } from './MainStyle';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { AuthContext } from '../AuthContext';
 import ButtonGroup from './MainPageComponents/ButtonGroup';
 import WelcomeBlock from './MainPageComponents/WelcomeBlock';
 import PillInfoBlock from './MainPageComponents/PillInfoBlock';
 import AIAnalysisBlock from './MainPageComponents/AIAnalysisBlock';
 import DrugInputBlock from './MainPageComponents/DrugInputBlock'
+import axios from 'axios';
 
 const MainPageContainer = styled(MainContainer)`
   max-width: 1200px;
@@ -42,8 +42,25 @@ const RightSection = styled.div`
 const MainPage = () => {
   const { auth, logout } = useContext(AuthContext);
   const [queryInput, setQueryInput] = useState('');
-  const [drugInfo, setDrugInfo] = useState(['A 약물', 'B 약물', 'C 약물']);
+  const [drugInfo, setDrugInfo] = useState(null);
 
+  const getDrugInfo = () =>{
+    const formData = new FormData();
+    formData.append('patient_name', auth.username);
+    axios.post('/see-medi-info/', formData)
+      .then((response)=>{
+        const data = [];
+        response.data.forEach(element => {
+          data.push(element.medication_name);
+        });
+        setDrugInfo(data);
+        console.log(response.data);
+      });
+  };
+  
+  if (!drugInfo && auth.userType === '환자'){
+    getDrugInfo();
+  }
 
   const navigate = useNavigate();
 
