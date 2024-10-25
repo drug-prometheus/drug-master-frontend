@@ -42,8 +42,8 @@ const DrugInfoBlock = ({auth, unloginedEvent, drugInfo , setDrugInfo})=>{
 
     const handleAddDrug = () => {
         if (newDrug) {
-        setDrugInfo([...drugInfo, newDrug]);
-        setNewDrug('');
+            setDrugInfo([...drugInfo, newDrug]);
+            setNewDrug('');
         }
     };
 
