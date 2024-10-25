@@ -1,11 +1,13 @@
 // 약물 검색 페이지
 import React, { useState, useEffect } from 'react';
+// import Modal from 'react-modal';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import Header from './Header';
 import SearchBar from './SearchBar';
 import { MainContainer, Block } from './MainStyle';
 import axios from 'axios';
+import DrugInfoModel from './DrugInfoModal';
 
 const DrugInfoContainer = styled.div`
   width: 100%;
@@ -22,6 +24,7 @@ const DrugCard = styled(Block)`
   border-radius: 15px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-bottom: 15px;
+  cursor: pointer;
 `;
 
 const DrugImage = styled.img`
@@ -52,6 +55,8 @@ const DrugDescription = styled.p`
 const SearchDrugPage = () => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [queryInput, setQueryInput] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedDrug, setSelectedDrug] = useState(Object);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const query = queryParams.get('query');
@@ -81,11 +86,11 @@ const SearchDrugPage = () => {
         return (
           <DrugInfoContainer>
               {filteredSuggestions.map((drug) => (
-                <DrugCard key={drug.id}>
-                  <DrugImage src={drug.imageUrl} alt={drug.name} />
+                <DrugCard key={drug.id} onClick={()=>{setSelectedDrug(drug); setIsOpen(true)}}>
+                  <DrugImage src='pills_image.png' alt={drug.medication_name} />
                   <DrugInfo>
-                    <DrugName>{drug.name}</DrugName>
-                    <DrugDescription>{drug.description}</DrugDescription>
+                    <DrugName>{drug.medication_name}</DrugName>
+                    <DrugDescription>{drug.medical_properties}</DrugDescription>
                   </DrugInfo>
                 </DrugCard>
               ))}
@@ -103,6 +108,8 @@ const SearchDrugPage = () => {
   return (
     <MainContainer>        
     <Header />
+    <DrugInfoModel isOpen={isOpen} setIsOpen={setIsOpen} drugInfo={selectedDrug}
+    />
     <SearchBar queryInput={queryInput} setQueryInput={setQueryInput} handleQueryChange={(e)=>handleQueryChange(e.target.value)} style={{width: "100%"}}/>
       {renderSuggestions()}
     </MainContainer>
