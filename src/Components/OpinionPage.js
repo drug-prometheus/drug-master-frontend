@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 import Header from './Header';
 import { MainContainer, Block } from './MainStyle';
 
@@ -70,7 +69,6 @@ const NoteContent = styled.textarea`
 
 const OpinionPage = () => {
     const [noteContent, setNoteContent] = useState('');
-    const navigate = useNavigate();
 
     // 원래는 DB에서 가져와야 하지만 임시로 적어둠
     const dates = [
