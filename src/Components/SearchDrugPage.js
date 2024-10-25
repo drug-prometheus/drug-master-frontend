@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import Header from './Header';
 import SearchBar from './SearchBar';
 import { MainContainer, Block } from './MainStyle';
+import axios from 'axios';
 
 const DrugInfoContainer = styled.div`
   width: 100%;
@@ -56,24 +57,29 @@ const SearchDrugPage = () => {
   const query = queryParams.get('query');
 
 
-      const handleQueryChange = (query) => {
-        const filtered = pillInfos.filter(
-            (pillInfo) => (pillInfo['name'].toLowerCase().indexOf(query.toLowerCase()) > -1 ||
-            pillInfo['description'].toLowerCase().indexOf(query.toLowerCase()) > -1)
-          );
-      
-          // 추천 목록 상태 업데이트 및 목록 표시
-          setFilteredSuggestions(filtered);
-      };
+
+  const handleQueryChange = async (query) => {
+    const result = await axios.get('/search-medicine/');
+    const pillInfos = [];
+    result.data.forEach(element => {
+      console.log(element);
+      pillInfos.push(element);
+    });
+
+    const filtered = pillInfos.filter(
+        (pillInfo) => (pillInfo.medication_name.toLowerCase().indexOf(query.toLowerCase()) > -1 ||
+        pillInfo.medical_properties.toLowerCase().indexOf(query.toLowerCase()) > -1)
+      );
+
+    // 추천 목록 상태 업데이트 및 목록 표시
+    setFilteredSuggestions(filtered);
+  };
     
   
   const renderSuggestions = () => {
-
-    // if (showSuggestions && queryInput) {
       if (filteredSuggestions.length) {
         return (
           <DrugInfoContainer>
-
               {filteredSuggestions.map((drug) => (
                 <DrugCard key={drug.id}>
                   <DrugImage src={drug.imageUrl} alt={drug.name} />
@@ -94,7 +100,6 @@ const SearchDrugPage = () => {
       handleQueryChange(query)
     }
   }, []);
-
   return (
     <MainContainer>        
     <Header />
