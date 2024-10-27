@@ -1,9 +1,11 @@
 // 유저 화면, 
 
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import Header from './Header';
 import { MainContainer, Block } from './MainStyle';
+import { AuthContext } from '../AuthContext';
+import axios from 'axios';
 
 const ContentContainer = styled.div`
     display: flex;
@@ -17,7 +19,7 @@ const DateListContainer = styled(Block)`
     width: 200px;
     height: 300px; 
     flex: 1;
-    background-color: #E3F2FD; /* 연한 파란색 */
+    background-color: #E3F2FD; 
     border-radius: 10px;
     padding: 20px;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
@@ -28,25 +30,25 @@ const DateListContainer = styled(Block)`
 const DateTitle = styled.h2`
     font-size: 25px;
     margin-bottom: 20px;
-    color: #1E88E5; /* 진한 파란색 */
+    color: #1E88E5; 
 `;
 
 const DateItem = styled.div`
     margin-bottom: 10px;
     padding: 10px;
-    background-color: #E3F2FD; /* 연한 파란색 */
+    background-color: #E3F2FD; 
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     cursor: pointer;
 
     &:hover {
-        background-color: #BBDEFB; /* 중간 파란색으로 변경 */
+        background-color: #BBDEFB; 
     }
 `;
 
 const NoteContainer = styled(Block)`
     flex: 3;
-    background-color: #BBDEFB; /* 중간 파란색 */
+    background-color: #BBDEFB; 
     border-radius: 10px;
     padding: 20px;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
@@ -62,13 +64,27 @@ const NoteContent = styled.textarea`
     border: 1px solid #ddd;
     outline: none;
     resize: none;
-    background-color: #FFFCF5; /* 기존 색상 유지 */
-    pointer-events: none; /* 수정 불가 */
+    background-color: #FFFCF5; 
+    pointer-events: none; 
 `;
 
 
 const OpinionPage = () => {
     const [noteContent, setNoteContent] = useState('');
+    const { auth } = useContext(AuthContext);
+
+    const loadOpinions = ()=>{
+        axios.post('/pharmacist-opinion/', {
+            patient: auth.username
+            })
+            .then((response)=>{
+                console.log(response.data);
+            });
+    }
+
+    if (!noteContent){
+        loadOpinions();
+    }
 
     // 원래는 DB에서 가져와야 하지만 임시로 적어둠
     const dates = [
