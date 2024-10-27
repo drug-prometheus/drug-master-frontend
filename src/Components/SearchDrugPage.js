@@ -87,7 +87,12 @@ const SearchDrugPage = () => {
         return (
           <DrugInfoContainer>
               {filteredSuggestions.map((drug) => (
-                <DrugCard key={drug.id} onClick={()=>{setSelectedDrug(drug); setIsOpen(true)}}>
+                <DrugCard key={drug.id} onClick={async ()=>{
+                    setSelectedDrug(drug);
+                    var response =  await axios.post('/search-medicine/', {medication_name: drug.medication_name});
+                    console.log(response.data);
+                    setIsOpen(true);
+                  }}>
                   <DrugImage src='pills_image.png' alt={drug.medication_name} />
                   <DrugInfo>
                     <DrugName>{drug.medication_name}</DrugName>
