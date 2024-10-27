@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import Header from './Header';
 import { MainContainer, Block } from './MainStyle';
+import axios from 'axios';
 
 const ContentContainer = styled.div`
     display: flex;
@@ -136,8 +137,14 @@ const PharmacistOpinionPage = () => {
     
       const handleSaveClick = () => {
         // 여기에 DB 저장 로직 추가
-        alert('소견이 저장되었습니다.');
-        setIsEditable(false);
+        axios.post('/save-pharmacist-opinion/', {
+            patient: selectedPatient,
+            opinion: noteContent
+        })
+        .then(()=>{
+            alert('소견이 저장되었습니다.');
+            setIsEditable(false);
+        })
       };
       const queryParams = new URLSearchParams(location.search);
     const patientName = queryParams.get('patientName');
