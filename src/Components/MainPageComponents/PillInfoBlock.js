@@ -48,9 +48,9 @@ const AskPharmacistButton = styled.button`
   }
 `;
 
-const PillInfoBlock = ({auth, unloginedEvent, drugInfo})=>{
+const PillInfoBlock = ({auth, unloginedEvent, drugInfo, opinionRequested})=>{
     const navigate = useNavigate();
-    const [opinionRequest, setOpinionRequest] = useState(['홍길동', '정윤성']);
+    
 
     if (auth.userType === '약사'){
       return (
@@ -58,7 +58,7 @@ const PillInfoBlock = ({auth, unloginedEvent, drugInfo})=>{
           <h3>요청 소견 보기</h3>
           <p>소견 요청한 환자는 다음과 같습니다 :</p>
           <DrugList>
-            {opinionRequest.map((patientName, index) => (
+            {opinionRequested?.map((patientName, index) => (
               <DrugItem key={index} onClick={()=>{
                 navigate('/opinion?patientName=' + patientName)
               }}>
