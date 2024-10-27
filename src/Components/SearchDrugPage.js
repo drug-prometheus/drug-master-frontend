@@ -74,7 +74,11 @@ const SearchDrugPage = () => {
         (pillInfo) => (pillInfo.medication_name.toLowerCase().indexOf(query.toLowerCase()) > -1 ||
         pillInfo.medical_properties.toLowerCase().indexOf(query.toLowerCase()) > -1)
       );
-    setFilteredSuggestions(filtered);
+    if (filtered.length <= 0){
+      setFilteredSuggestions(pillInfos);
+    }else {
+      setFilteredSuggestions(filtered);
+    }
   };
     
   
