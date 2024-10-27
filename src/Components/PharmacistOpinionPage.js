@@ -107,18 +107,18 @@ const PharmacistOpinionPage = () => {
 
     // 원래는 DB에서 가져와야 하지만 임시로 적어둠
     const patients = [
-      '홍길동 님',
-      '김철수 님',
-      '이영희 님',
-      '박지민 님',
+      '홍길동',
+      '김철수',
+      '이영희',
+      '박지민',
     ];
 
     // 소견도 원래 DB에서 가져와야 함
     const notesFromDB = {
-      '홍길동 님': '홍길동 님은 현재 약물 A, B, C를 복용 중입니다. 증상은 호전되고 있습니다.',
-      '김철수 님': '김철수 님은 혈압약을 복용 중입니다. 복약 관리를 철저히 할 필요가 있습니다.',
-      '이영희 님': '이영희 님은 진통제를 복용 중입니다. 추가 진단이 필요합니다.',
-      '박지민 님': '박지민 님은 항생제를 복용 중이며, 경과를 지켜봐야 합니다.',
+      '홍길동': '홍길동 님은 현재 약물 A, B, C를 복용 중입니다. 증상은 호전되고 있습니다.',
+      '김철수': '김철수 님은 혈압약을 복용 중입니다. 복약 관리를 철저히 할 필요가 있습니다.',
+      '이영희': '이영희 님은 진통제를 복용 중입니다. 추가 진단이 필요합니다.',
+      '박지민': '박지민 님은 항생제를 복용 중이며, 경과를 지켜봐야 합니다.',
     };
 
     const handlePatientSelect = (patient) => {
@@ -150,7 +150,7 @@ const PharmacistOpinionPage = () => {
     const patientName = queryParams.get('patientName');
       useEffect(() => {
         if (patientName != null){
-            handlePatientSelect(patientName + " 님")
+            handlePatientSelect(patientName)
         }
       }, []);
 
