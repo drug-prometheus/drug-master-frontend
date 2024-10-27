@@ -1,6 +1,5 @@
 // 약물 검색 페이지
 import React, { useState, useEffect } from 'react';
-// import Modal from 'react-modal';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import Header from './Header';
@@ -17,7 +16,7 @@ const DrugInfoContainer = styled.div`
 
 const DrugCard = styled(Block)`
   display: flex;
-  background-color: #F7F9FC; /* 연한 파란색 */
+  background-color: #F7F9FC;
   width: 90%;
   padding: 15px;
   margin: auto;
@@ -43,7 +42,7 @@ const DrugInfo = styled.div`
 const DrugName = styled.h3`
   margin: 0;
   font-size: 18px;
-  color: #003366; /* 진한 파란색 */
+  color: #003366;
 `;
 
 const DrugDescription = styled.p`
@@ -75,8 +74,6 @@ const SearchDrugPage = () => {
         (pillInfo) => (pillInfo.medication_name.toLowerCase().indexOf(query.toLowerCase()) > -1 ||
         pillInfo.medical_properties.toLowerCase().indexOf(query.toLowerCase()) > -1)
       );
-
-    // 추천 목록 상태 업데이트 및 목록 표시
     setFilteredSuggestions(filtered);
   };
     

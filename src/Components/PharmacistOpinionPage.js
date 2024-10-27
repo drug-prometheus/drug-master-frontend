@@ -25,19 +25,19 @@ const PatientListContainer = styled(Block)`
 const PatientTitle = styled.h2`
     font-size: 25px;
     margin-bottom: 20px;
-    color: #003366; /* 진한 파란색 */
+    color: #003366; 
 `;
 
 const PatientItem = styled.div`
     margin-bottom: 10px;
     padding: 10px;
-    background-color: #E6F7FF; /* 연한 파란색 */
+    background-color: #E6F7FF; 
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     cursor: pointer;
 
     &:hover {
-        background-color: #B3E0FF; /* 중간 파란색 */
+        background-color: #B3E0FF; 
     }
 `;
 
@@ -52,7 +52,7 @@ const NoteContainer = styled(Block)`
 const NoteTitle = styled.h2`
     font-size: 30px;
     margin-bottom: 20px;
-    color: #003366; /* 진한 파란색 */
+    color: #003366; 
 `;
 
 const NoteContent = styled.textarea`
@@ -61,10 +61,10 @@ const NoteContent = styled.textarea`
     font-size: 16px;
     border-radius: 10px;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
-    border: 1px solid #B3D9FF; /* 연한 파란색 */
+    border: 1px solid #B3D9FF; 
     outline: none;
     resize: none;
-    background-color: ${(props) => (props.editable ? '#E6F7FF' : '#E6F7FF')}; /* 연한 파란색 */
+    background-color: ${(props) => (props.editable ? '#E6F7FF' : '#E6F7FF')}; 
     pointer-events: ${(props) => (props.editable ? 'auto' : 'none')};
 `;
 
@@ -78,7 +78,7 @@ const ButtonContainer = styled.div`
 const EditButton = styled.button`
     font-size: 20px;
     padding: 10px 20px;
-    background-color: #007BFF; /* 파란색 */
+    background-color: #007BFF; 
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
     color: white;
     border: none;
@@ -89,7 +89,7 @@ const EditButton = styled.button`
 const SaveButton = styled.button`
     font-size: 20px;
     padding: 10px 20px;
-    background-color: #007BFF; /* 파란색 */
+    background-color: #007BFF; 
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
     color: white;
     border: none;

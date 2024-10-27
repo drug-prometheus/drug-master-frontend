@@ -16,7 +16,7 @@ const SearchContainer = styled.div`
   box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
     &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 호버 시 강조 */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
   }
 `;
 

@@ -2,25 +2,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 24px; /* 폰트 크기 조정 */
+  font-size: 24px; 
   font-weight: bold;
-  padding: 15px 20px; /* 좌우 패딩을 줄여서 너비를 맞춤 */
-  background-color: #4A90E2; /* 배경색 */
+  padding: 15px 20px; 
+  background-color: #4A90E2; 
   color: #fff;
-  width: 100%; /* 화면의 너비를 100%로 설정 */
+  width: 100%; 
   position: relative;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 약한 그림자 추가 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
 }
 
 .header .container {
   display: flex;
-  background-color: #4A90E2; /* 배경색 */
-  justify-content: space-between; /* 좌우 배치 */
+  background-color: #4A90E2; 
+  justify-content: space-between; 
   align-items: center;
-  max-width: 1200px; /* 내부 요소의 최대 너비 */
-  width: 100%; /* 컨테이너 너비를 100%로 */
-  margin: 0 auto; /* 화면 중앙으로 배치 */
-  padding: 0 20px; /* 좌우 패딩 추가 */
+  max-width: 1200px; 
+  width: 100%; 
+  margin: 0 auto; 
+  padding: 0 20px; 
 }
 
 .logo {
@@ -55,25 +55,25 @@
 }
 
 .nav-menu a:hover {
-  color: #F0F0F0; /* 호버 색상 */
+  color: #F0F0F0; 
   transform: scale(1.05);
 }
 
-/* 반응형 디자인 */
+
 @media (max-width: 768px) {
   .header {
-      flex-direction: column; /* 수직으로 정렬 */
-      align-items: flex-start; /* 왼쪽 정렬 */
-      padding: 15px 20px; /* 패딩 조정 */
+      flex-direction: column; 
+      align-items: flex-start; 
+      padding: 15px 20px; 
   }
   
   .nav-menu ul {
-      flex-direction: column; /* 세로 방향으로 정렬 */
-      align-items: flex-start; /* 왼쪽 정렬 */
-      padding: 0; /* 패딩 제거 */
+      flex-direction: column; 
+      align-items: flex-start; 
+      padding: 0; 
   }
 
   .nav-menu li {
-      margin: 10px 0; /* 세로 간격 조정 */
+      margin: 10px 0; 
   }
 }
