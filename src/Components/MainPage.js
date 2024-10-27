@@ -46,6 +46,20 @@ const MainPage = () => {
   const { auth, logout } = useContext(AuthContext);
   const [queryInput, setQueryInput] = useState('');
   const [drugInfo, setDrugInfo] = useState(null);
+  const [opinionRequested, setOpinionRequest] = useState(null);
+
+  const getOpinionRequested = () =>{
+    axios.post('/pharmacist-with-patients/', {
+      pharmacist: auth.username
+    })
+      .then((response)=>{
+        const data = [];
+        response.data.patient_names.forEach(element => {
+          data.push(element);
+        });
+        setOpinionRequest(data);
+      });
+  };
 
   const getDrugInfo = () =>{
     const formData = new FormData();
@@ -61,6 +75,10 @@ const MainPage = () => {
       });
   };
   
+  if (!opinionRequested && auth.userType === '약사'){
+    getOpinionRequested();
+  }
+
   if (!drugInfo && auth.userType === '환자'){
     getDrugInfo();
   }
@@ -85,7 +103,7 @@ const MainPage = () => {
         <RightSection>
           <WelcomeBlock auth={auth} logout={logout}></WelcomeBlock>
           <ButtonGroup unloginedEvent={unloginedEvent} auth={auth}></ButtonGroup>
-          <PillInfoBlock auth={auth} unloginedEvent={unloginedEvent} drugInfo={drugInfo}></PillInfoBlock>
+          <PillInfoBlock auth={auth} unloginedEvent={unloginedEvent} drugInfo={drugInfo} opinionRequested={opinionRequested}></PillInfoBlock>
         </RightSection>
       </ContentContainer>
       </MainPageMainBlock>
