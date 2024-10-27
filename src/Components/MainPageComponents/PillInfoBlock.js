@@ -50,7 +50,9 @@ const AskPharmacistButton = styled.button`
 
 const PillInfoBlock = ({auth, unloginedEvent, drugInfo, opinionRequested})=>{
     const navigate = useNavigate();
-    
+    const searchDrug = (queryInput) => {
+      navigate(((queryInput==='')? '/search' : '/search?query=' + queryInput));
+    };
 
     if (auth.userType === '약사'){
       return (
@@ -76,7 +78,9 @@ const PillInfoBlock = ({auth, unloginedEvent, drugInfo, opinionRequested})=>{
         <p>{auth.username}님은 현재 아래 약물을 복용 중입니다:</p>
         <DrugList>
           {drugInfo?.map((drug, index) => (
-            <DrugItem key={index}>
+            <DrugItem key={index} onClick={()=>{
+              searchDrug(drug);
+            }}>
               <DrugIcon>💊</DrugIcon>
               {drug}
             </DrugItem>
