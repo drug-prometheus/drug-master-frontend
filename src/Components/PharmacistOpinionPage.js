@@ -1,11 +1,12 @@
 // 약사 화면. 약사 소견 작성, 수정 및 관리 화면.
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import Header from './Header';
 import { MainContainer, Block } from './MainStyle';
 import axios from 'axios';
+import { AuthContext } from '../AuthContext';
 
 const ContentContainer = styled.div`
     display: flex;
@@ -100,18 +101,13 @@ const SaveButton = styled.button`
 
 
 const PharmacistOpinionPage = () => {
+    const { auth, logout } = useContext(AuthContext);
     const [selectedPatient, setSelectedPatient] = useState(null);
     const [noteContent, setNoteContent] = useState('');
     const [isEditable, setIsEditable] = useState(false);
     const location = useLocation();
+    const [patients, setPatients] = useState(null);
 
-    // 원래는 DB에서 가져와야 하지만 임시로 적어둠
-    const patients = [
-      '홍길동',
-      '김철수',
-      '이영희',
-      '박지민',
-    ];
 
     // 소견도 원래 DB에서 가져와야 함
     const notesFromDB = {
@@ -120,6 +116,24 @@ const PharmacistOpinionPage = () => {
       '이영희': '이영희 님은 진통제를 복용 중입니다. 추가 진단이 필요합니다.',
       '박지민': '박지민 님은 항생제를 복용 중이며, 경과를 지켜봐야 합니다.',
     };
+
+    const loadPatients = ()=>{
+        axios.post('/pharmacist-with-patients/', {
+            pharmacist: auth.username
+        })
+            .then((response)=>{
+                const temp = [];
+                console.log(response.data.patient_names);
+                for (const element in response.data.patient_names){
+                    temp.push(response.data.patient_names[element]);
+                }
+                setPatients(temp);
+            });
+    };
+
+    if (!patients && auth.userType === '약사'){
+        loadPatients();
+    }
 
     const handlePatientSelect = (patient) => {
         setSelectedPatient(patient);
@@ -136,7 +150,6 @@ const PharmacistOpinionPage = () => {
       };
     
       const handleSaveClick = () => {
-        // 여기에 DB 저장 로직 추가
         axios.post('/save-pharmacist-opinion/', {
             patient: selectedPatient,
             opinion: noteContent
@@ -145,6 +158,9 @@ const PharmacistOpinionPage = () => {
             alert('소견이 저장되었습니다.');
             setIsEditable(false);
         })
+        .catch((err)=>{
+            alert('내용을 확인해주세요.');
+        });
       };
       const queryParams = new URLSearchParams(location.search);
     const patientName = queryParams.get('patientName');
@@ -160,7 +176,7 @@ const PharmacistOpinionPage = () => {
         <ContentContainer>
             <PatientListContainer>
                 <PatientTitle>환자 관리</PatientTitle>
-                {patients.map((patient) => (
+                {patients?.map((patient) => (
                 <PatientItem key={patient} onClick={() => handlePatientSelect(patient)}>
                     {patient}
                 </PatientItem>
