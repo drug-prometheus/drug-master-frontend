@@ -20,7 +20,7 @@ const BlackModal = styled(Modal)`
         transform: translateY(-5px);
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
-`
+`;
 
 const Title = styled.h2`
     margin-bottom: 15px;
@@ -31,17 +31,32 @@ const Property = styled.div`
     font-size: 16px;
 `;
 
-const DrugInfoModel = ({isOpen, setIsOpen, drugInfo}) => {
+const DrugInfoModel = ({isOpen, setIsOpen, drugInfo, nonMixturePills, setNonMixturePills}) => {
+    var result;
+    nonMixturePills?.forEach(element => {
+        result += element;
+    });
 
     return (
         <BlackModal
             isOpen={isOpen} 
-            onRequestClose={()=>{setIsOpen(false)}} 
+            onRequestClose={()=>{
+                setIsOpen(false);
+                setNonMixturePills(null);
+            }} 
             contentLabel="Drug Info Model"
         >
             <Title>{drugInfo.medication_name ?? '해당 없음'}</Title>
             <Property><strong>분류</strong>
             <ReactMarkdown>{drugInfo.properties_classification ?? '해당 없음'}</ReactMarkdown> </Property>
+            <Property>
+                <strong> 병용 금지</strong>
+                <ReactMarkdown>
+                    {
+                        result ?? '정보 없음'
+                    }
+                </ReactMarkdown>
+            </Property>
             <Property><strong>증상 치료</strong> 
             <ReactMarkdown>{drugInfo.medical_properties ?? '해당 없음'}</ReactMarkdown></Property>
             <Property><strong>사용 용량</strong> 
