@@ -72,39 +72,24 @@ const NoteContent = styled.textarea`
 const OpinionPage = () => {
     const [noteContent, setNoteContent] = useState('');
     const { auth } = useContext(AuthContext);
+    const [opinions, setOpinions] = useState(null);
 
     const loadOpinions = ()=>{
         axios.post('/pharmacist-opinion/', {
             patient: auth.username
             })
             .then((response)=>{
-                console.log(response.data);
+                setOpinions(response.data.note);
             });
     }
 
-    if (!noteContent){
+    if (!opinions && auth.userType === '환자'){
         loadOpinions();
     }
-
-    // 원래는 DB에서 가져와야 하지만 임시로 적어둠
-    const dates = [
-      new Date("2024-09-10"),
-      new Date("2024-09-17"),
-      new Date("2024-09-24"),
-      new Date("2024-10-03"),
-    ];
-
-    // 소견도 원래 DB에서 가져와야 함
-    const notesFromDB = {
-        "9/10/2024": '홍길동 님은 현재 약물 A, B, C를 복용 중입니다. 증상은 호전되고 있습니다.',
-        "9/17/2024": '홍길동 님은 혈압약을 복용 중입니다. 복약 관리를 철저히 할 필요가 있습니다.',
-        "9/24/2024": '홍길동 님은 진통제를 복용 중입니다. 추가 진단이 필요합니다.',
-        "10/3/2024": '홍길동 님은 항생제를 복용 중이며, 경과를 지켜봐야 합니다.',
-    };
   
-    const handleDateSelect = (date) => {
-        console.log(date.toLocaleDateString());
-        setNoteContent(notesFromDB[date.toLocaleDateString()]);
+    const handleDateSelect = (opinion) => {
+        console.log(opinion);
+        setNoteContent(opinion.note);
       };
 
     return (
@@ -113,9 +98,9 @@ const OpinionPage = () => {
         <ContentContainer>
             <DateListContainer>
                 <DateTitle>날짜 선택</DateTitle>
-                {dates.map((date) => (
-                <DateItem key={date.toString()} onClick={() => handleDateSelect(date)}>
-                    {date.toLocaleDateString()}
+                {opinions?.map((opinion) => (
+                <DateItem key={opinion.created_at} onClick={() => handleDateSelect(opinion)}>
+                    {opinion.created_at.split('T')[0]}
                 </DateItem>
                 ))}
             </DateListContainer>
