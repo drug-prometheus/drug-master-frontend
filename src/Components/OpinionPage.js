@@ -79,7 +79,9 @@ const OpinionPage = () => {
             patient: auth.username
             })
             .then((response)=>{
+                response.data.note.reverse()
                 setOpinions(response.data.note);
+                handleDateSelect(response.data.note[0]);
             });
     }
 
