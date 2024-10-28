@@ -57,15 +57,26 @@ const NoteTitle = styled.h2`
     color: #003366; 
 `;
 
-const NoteContent = styled.textarea`
+const InfoContent = styled.div`
+    text-align: center;
+    flex: 1;
     width: 100%;
     height: 300px;
     font-size: 16px;
     border-radius: 10px;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
+    background-color: #F7F9FC;
+`
+
+const NoteContent = styled.textarea`
+    flex: 5;
+    width: 100%;
+    height: 280px;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
     border: 1px solid #B3D9FF; 
-    outline: none;
-    resize: none;
     background-color: ${(props) => (props.editable ? '#E6F7FF' : '#E6F7FF')}; 
     pointer-events: ${(props) => (props.editable ? 'auto' : 'none')};
 `;
@@ -101,21 +112,13 @@ const SaveButton = styled.button`
 
 
 const PharmacistOpinionPage = () => {
-    const { auth, logout } = useContext(AuthContext);
+    const { auth } = useContext(AuthContext);
     const [selectedPatient, setSelectedPatient] = useState(null);
     const [noteContent, setNoteContent] = useState('');
     const [isEditable, setIsEditable] = useState(false);
     const location = useLocation();
     const [patients, setPatients] = useState(null);
-
-
-    // 소견도 원래 DB에서 가져와야 함
-    const notesFromDB = {
-      '홍길동': '홍길동 님은 현재 약물 A, B, C를 복용 중입니다. 증상은 호전되고 있습니다.',
-      '김철수': '김철수 님은 혈압약을 복용 중입니다. 복약 관리를 철저히 할 필요가 있습니다.',
-      '이영희': '이영희 님은 진통제를 복용 중입니다. 추가 진단이 필요합니다.',
-      '박지민': '박지민 님은 항생제를 복용 중이며, 경과를 지켜봐야 합니다.',
-    };
+    const [pillInfos, setPillInfos] = useState([]);
 
     const loadPatients = ()=>{
         axios.post('/pharmacist-with-patients/', {
@@ -135,10 +138,21 @@ const PharmacistOpinionPage = () => {
         loadPatients();
     }
 
+    const loadPillInfos = (patient_name)=>{
+        axios.post('/see-medi-info/', {patient_name: patient_name})
+            .then((response)=>{
+                const temp = [];
+                for (const item in response.data){
+                    temp.push(response.data[item]);
+                }
+                setPillInfos(temp);
+            })
+    }
+
     const handlePatientSelect = (patient) => {
         setSelectedPatient(patient);
-        setNoteContent(notesFromDB[patient]);
         setIsEditable(false);
+        loadPillInfos(patient);
       };
     
       const handleNoteChange = (e) => {
@@ -178,30 +192,47 @@ const PharmacistOpinionPage = () => {
                 <PatientTitle>환자 관리</PatientTitle>
                 {patients?.map((patient) => (
                 <PatientItem key={patient} onClick={() => handlePatientSelect(patient)}>
-                    {patient}
+                    {patient + '님'}
                 </PatientItem>
                 ))}
             </PatientListContainer>
     
+            
             <NoteContainer>
-                <NoteTitle>{selectedPatient ? `${selectedPatient} 소견` : '환자를 선택하세요'}</NoteTitle>
-                <NoteContent
-                    value={noteContent}
-                    onChange={handleNoteChange}
-                    editable={isEditable}
-                />
-                        {selectedPatient && (
-            <ButtonContainer>
-            <EditButton onClick={handleEditClick}>
-                약사 소견 입력
-            </EditButton>
-            {isEditable && (
-                <SaveButton onClick={handleSaveClick}>
-                소견 저장
-                </SaveButton>
-            )}
-            </ButtonContainer>
-        )}
+                <NoteTitle>{selectedPatient ? `${selectedPatient}님 소견` : '환자를 선택하세요'}</NoteTitle>
+                <div style={{display: 'flex', gap: '10px'}}>
+                    <InfoContent>
+                        <h3>
+                            복용하는 약
+                        </h3>
+                        {
+                            pillInfos?.map((pillInfo)=>(
+                                <>
+                                    {pillInfo.medication_name}
+                                    <br/>
+                                </>
+                            ))
+                        }
+                    </InfoContent>
+                    <NoteContent
+                        value={noteContent}
+                        onChange={handleNoteChange}
+                        editable={isEditable}
+                    />
+                </div>
+                
+                {selectedPatient && (
+                    <ButtonContainer>
+                        <EditButton onClick={handleEditClick}>
+                                약사 소견 입력
+                        </EditButton>
+                        {isEditable && (
+                            <SaveButton onClick={handleSaveClick}>
+                            소견 저장
+                            </SaveButton>
+                        )}
+                    </ButtonContainer>
+                )}
             </NoteContainer>
         </ContentContainer>
 
