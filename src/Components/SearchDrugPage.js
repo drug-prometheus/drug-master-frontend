@@ -56,6 +56,7 @@ const SearchDrugPage = () => {
   const [queryInput, setQueryInput] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDrug, setSelectedDrug] = useState(Object);
+  const [nonMixturePills, setNonMixturePills] = useState(null);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const query = queryParams.get('query');
@@ -80,7 +81,6 @@ const SearchDrugPage = () => {
       setFilteredSuggestions(filtered);
     }
   };
-    
   
   const renderSuggestions = () => {
       if (filteredSuggestions.length) {
@@ -89,8 +89,13 @@ const SearchDrugPage = () => {
               {filteredSuggestions.map((drug) => (
                 <DrugCard key={drug.id} onClick={async ()=>{
                     setSelectedDrug(drug);
-                    var response =  await axios.post('/search-medicine/', {medication_name: drug.medication_name});
-                    console.log(response.data);
+                    try{
+                      var response =  await axios.post('/search-medicine/', {medication_name: drug.medication_name});
+                      console.log(response.data);
+                    } catch {
+                      setNonMixturePills(null);
+                    }
+
                     setIsOpen(true);
                   }}>
                   <DrugImage src='pills_image.png' alt={drug.medication_name} />
@@ -114,8 +119,7 @@ const SearchDrugPage = () => {
   return (
     <MainContainer>        
     <Header />
-    <DrugInfoModel isOpen={isOpen} setIsOpen={setIsOpen} drugInfo={selectedDrug}
-    />
+    <DrugInfoModel isOpen={isOpen} setIsOpen={setIsOpen} drugInfo={selectedDrug} nonMixturePills={nonMixturePills} setNonMixturePills={setNonMixturePills}/>
     <SearchBar queryInput={queryInput} setQueryInput={setQueryInput} handleQueryChange={(e)=>handleQueryChange(e.target.value)} style={{width: "100%"}}/>
       {renderSuggestions()}
     </MainContainer>
