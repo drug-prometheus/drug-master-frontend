@@ -32,11 +32,12 @@ const Property = styled.div`
 `;
 
 const DrugInfoModel = ({isOpen, setIsOpen, drugInfo, nonMixturePills, setNonMixturePills}) => {
-    var result;
-    nonMixturePills?.forEach(element => {
-        result += element;
+    var result = "";
+    console.log(nonMixturePills);
+    nonMixturePills?.no_mixture?.forEach(element => {
+        console.log(element);
+        result += '* ' + element;
     });
-
     return (
         <BlackModal
             isOpen={isOpen} 
@@ -52,8 +53,12 @@ const DrugInfoModel = ({isOpen, setIsOpen, drugInfo, nonMixturePills, setNonMixt
             <Property>
                 <strong> 병용 금지</strong>
                 <ReactMarkdown>
-                    {
-                        result ?? '정보 없음'
+                    {(()=>{
+                        if (result === ""){
+                            return '정보 없음'
+                        } else {
+                            return result
+                        }})()
                     }
                 </ReactMarkdown>
             </Property>
