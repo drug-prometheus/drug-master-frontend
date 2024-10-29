@@ -58,7 +58,7 @@ const PillInfoBlock = ({auth, unloginedEvent, drugInfo, opinionRequested})=>{
       return (
         <Block>
           <h3>요청 소견 보기</h3>
-          <p>소견 요청한 환자는 다음과 같습니다 :</p>
+          <p>소견 요청한 환자는 다음과 같습니다</p>
           <DrugList>
             {opinionRequested?.map((patientName, index) => (
               <DrugItem key={index} onClick={()=>{
@@ -75,7 +75,7 @@ const PillInfoBlock = ({auth, unloginedEvent, drugInfo, opinionRequested})=>{
       return (
       <DrugInfoBlock>
         <h3>약물 정보 보기</h3>
-        <p>{auth.username}님은 현재 아래 약물을 복용 중입니다:</p>
+        <p>{auth.username}님은 현재 아래 약물을 복용 중입니다</p>
         <DrugList>
           {drugInfo?.map((drug, index) => (
             <DrugItem key={index} onClick={()=>{
