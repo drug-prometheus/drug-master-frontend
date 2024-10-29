@@ -92,6 +92,7 @@ const SearchDrugPage = () => {
                     try{
                       var response =  await axios.post('/search-medicine/', {medication_name: drug.medication_name});
                       console.log(response.data);
+                      setNonMixturePills(response.data)
                     } catch {
                       setNonMixturePills(null);
                     }
