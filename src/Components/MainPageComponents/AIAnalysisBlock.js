@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { Block } from '../MainStyle';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../AuthContext';
 
 const UploadButton = styled.button`
   background-color: #FF6F61;
@@ -27,9 +29,11 @@ const AIAnalysisContainer = styled(Block)`
   height: 450px;
 `;
 
-const AIAnalysisBlock = (auth)=>{
+const AIAnalysisBlock = ()=>{
+    const { auth } = useContext(AuthContext);
     const [image, setImage] = useState(null);
     const [previewUrl, setPreviewUrl] = useState(null);
+    const navigate  = useNavigate();
     const handleImageUpload = (e) => {
         setImage(e.target.files[0]);
         setPreviewUrl(URL.createObjectURL(e.target.files[0]));
@@ -41,11 +45,19 @@ const AIAnalysisBlock = (auth)=>{
             return;
         }
         const formData = new FormData();
+        console.log(auth.username);
         formData.append('patient', auth.username);
-        formData.append('picture', image)
+        formData.append('picture', image);
         axios.post('/analyzing-medicine/', formData)
-            .then((data)=>{ 
-                console.log(data);
+            .then((response)=>{ 
+                console.log(response.data);
+         
+                navigate('/analysis', 
+                    {state: {
+                        medication_list: response.data.medication_list, 
+                        no_combination_list: response.data.no_combination_list
+                        }
+                    });
             })
             .catch((err)=>{
                 console.error(err);
