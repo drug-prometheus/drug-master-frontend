@@ -29,6 +29,14 @@ const AIAnalysisContainer = styled(Block)`
   height: 450px;
 `;
 
+const UploadedImage = styled.img`
+  width: 100%;
+  max-width: 250px;
+  max-height: 150px;
+  border-radius: 10px;
+  object-fit: cover;
+`;
+
 const AIAnalysisBlock = ()=>{
     const { auth } = useContext(AuthContext);
     const [image, setImage] = useState(null);
@@ -71,7 +79,7 @@ const AIAnalysisBlock = ()=>{
             <h2 style={{fontSize: '30px'}}>AI 약물 정보 분석</h2>
             <p style={{fontSize: '30px'}}>사진을 끌어다 놓거나 업로드 하세요</p>
             <input style={{fontSize: '30px'}} type="file" accept="image/*" onChange={handleImageUpload} />
-            {image && <img src={previewUrl} alt="Uploaded" style={{ marginTop: '20px', width: '100%', maxWidth: '250px', borderRadius: '10px' }} />}
+            {image && <UploadedImage src={previewUrl} alt="Uploaded" style={{ marginTop: '20px', width: '100%', maxWidth: '250px', borderRadius: '10px' }} />}
             <UploadButton onClick={sendToServer}>사진 올리기</UploadButton>
         </AIAnalysisContainer>
     );
