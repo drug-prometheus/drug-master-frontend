@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import styled from 'styled-components';
 import Header from './Header';
 import { MainContainer, Block} from './MainStyle';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
+import DrugInfoModel from "./DrugInfoModal";
 
 const MainBlock = styled(Block)`
     width: 80%;
@@ -46,6 +48,10 @@ const DrugCard = styled(Block)`
   cursor: pointer;
 `;
 
+const NoMixureDrugCard = styled(DrugCard)`
+  border: 1px solid red;
+`;
+
 const DrugImage = styled.img`
   width: 80px;
   height: 80px;
@@ -78,54 +84,93 @@ const DrugAnalysisPage = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedDrug, setSelectedDrug] = useState(Object);
     const [nonMixturePills, setNonMixturePills] = useState(null);
+    const [pillInfos, setPillInfos] = useState(null);
 
-    const pillInfos = [
-        "아세론정",
-        "아세트아미노펜",
-        "아세론정",
-        "아세트아미노펜",
-        "아세론정",
-        "아세트아미노펜"
-    ];
+    const location = useLocation();
+    // const medication_list =[
+    //   '발트렙정160밀리그램(발사르탄)',
+    //   '가스디알정50밀리그램(디메크로틴산마그네슘)',
+    //   '졸뎀속붕정(졸피뎀타르타르산염)'
+    // ];
+    const medication_list = location.state?.medication_list;
+    // const no_combination_list = [
+    //   '발트렙정160밀리그램(발사르탄)'
+    // ];
+    const no_combination_list = location.state?.no_combination_list;
 
-    const renderPillInfos = (pillInfos) => {
-        if (pillInfos.length) {
-          return (
-            <DrugInfoContainer>
-                {pillInfos.map((drug) => (
-                  <DrugCard key={drug} onClick={async ()=>{
-                      setSelectedDrug(drug);
-                      try{
-                        var response =  await axios.post('/search-medicine/', {medication_name: drug});
-                        console.log(response.data);
-                      } catch {
-                        setNonMixturePills(null);
-                      }
-    
-                      setIsOpen(true);
-                    }}>
-                    <DrugImage src='pills_image.png' alt={drug} />
-                    <DrugInfo>
-                      <DrugName>{drug}</DrugName>
-                      <DrugDescription>{drug}</DrugDescription>
-                    </DrugInfo>
-                  </DrugCard>
-                ))}
-            </DrugInfoContainer>
-          );
-        }
+    const loadPillInfos = async ()=>{
+      const result = await axios.get('/search-medicine/');
+      const pillInfos = [];
+      result.data.forEach(element => {
+        pillInfos.push(element);
+      });
+      setPillInfos(pillInfos);
+    }
+    if (!pillInfos){
+      loadPillInfos();
+    }
+
+
+    const renderPillInfos = (medication_list) => {
+      if (medication_list?.length) {
+        return (
+          <DrugInfoContainer>
+              {medication_list?.map((drug) => { 
+                let pill;
+                for (const pillInfo in pillInfos){
+                  if (pillInfos[pillInfo].medication_name === drug){
+                    pill = pillInfos[pillInfo];
+                    break;
+                  }
+                }
+                console.log(pill);
+                return (
+                !(no_combination_list.includes(drug))
+                ?
+                <DrugCard key={drug} onClick={async ()=>{
+                    setSelectedDrug(pill);
+                    try{
+                      var response =  await axios.post('/search-medicine/', {medication_name: drug});
+                      console.log(response.data);
+                    } catch {
+                      setNonMixturePills(null);
+                    }
+  
+                    setIsOpen(true);
+                  }}>
+                  <DrugImage src='pills_image.png' alt={drug} />
+                  <DrugInfo>
+                    <DrugName>{drug}</DrugName>
+                    <DrugDescription>{pill?.medical_properties || '정보 없음'}</DrugDescription>
+                  </DrugInfo>
+                </DrugCard>
+                :
+                <NoMixureDrugCard key={drug} onClick={async ()=>{
+                  setSelectedDrug(pill);
+                  try{
+                    var response =  await axios.post('/search-medicine/', {medication_name: drug});
+                    console.log(response.data);
+                  } catch {
+                    setNonMixturePills(null);
+                  }
+
+                  setIsOpen(true);
+                }}>
+                  <DrugImage src='pills_image.png' alt={drug} />
+                  <DrugInfo>
+                    <DrugName>{drug}</DrugName>
+                    <DrugDescription>{pill?.medical_properties || '정보 없음'}</DrugDescription>
+                  </DrugInfo>
+                </NoMixureDrugCard>
+              )})}
+          </DrugInfoContainer>
+        );
+      }
     };
-
-    // useEffect(() => {
-    //     var list = [];
-    //     pillInfos.forEach((info, index) => {
-    //         list.push(info + " " + numPills[index] + "정");
-    //     });
-    //     setAnalysises(list);
-    //   }, []);
 
     return (
         <MainContainer>
+          <DrugInfoModel isOpen={isOpen} setIsOpen={setIsOpen} drugInfo={selectedDrug} nonMixturePills={nonMixturePills} setNonMixturePills={setNonMixturePills}/>
             <Header />
             <MainBlock>
                 <h2>약물 분석 결과</h2>
@@ -133,13 +178,8 @@ const DrugAnalysisPage = () => {
                     <ImgBlock src="pills_image.png">
                     </ImgBlock>
                     {
-                        renderPillInfos(pillInfos)
+                      renderPillInfos(medication_list)
                     }
-                    {/* <ul>
-                        {analysises.map((text, index) => (
-                        <li key={index}>{text}</li>
-                        ))}
-                    </ul> */}
                 </SubBlock>
             </MainBlock>
         </MainContainer>
