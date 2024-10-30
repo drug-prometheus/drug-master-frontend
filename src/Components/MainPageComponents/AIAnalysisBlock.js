@@ -55,7 +55,8 @@ const AIAnalysisBlock = ()=>{
                 navigate('/analysis', 
                     {state: {
                         medication_list: response.data.medication_list, 
-                        no_combination_list: response.data.no_combination_list
+                        no_combination_list: response.data.no_combination_list,
+                        image: response.data.image
                         }
                     });
             })
