@@ -85,7 +85,7 @@ const DrugAnalysisPage = () => {
     const [selectedDrug, setSelectedDrug] = useState(Object);
     const [nonMixturePills, setNonMixturePills] = useState(null);
     const [pillInfos, setPillInfos] = useState(null);
-
+    
     const location = useLocation();
     // const medication_list =[
     //   '발트렙정160밀리그램(발사르탄)',
@@ -97,6 +97,7 @@ const DrugAnalysisPage = () => {
     //   '발트렙정160밀리그램(발사르탄)'
     // ];
     const no_combination_list = location.state?.no_combination_list;
+    const bbox_img = location.state?.image;
 
     const loadPillInfos = async ()=>{
       const result = await axios.get('/search-medicine/');
@@ -175,7 +176,7 @@ const DrugAnalysisPage = () => {
             <MainBlock>
                 <h2>약물 분석 결과</h2>
                 <SubBlock>
-                    <ImgBlock src="pills_image.png">
+                    <ImgBlock src={`data:image/jpeg;base64,${bbox_img}`}>
                     </ImgBlock>
                     {
                       renderPillInfos(medication_list)
