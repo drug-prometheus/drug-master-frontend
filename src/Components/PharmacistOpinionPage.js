@@ -66,6 +66,7 @@ const InfoContent = styled.div`
     border-radius: 10px;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
     background-color: #F7F9FC;
+    overflow-y: auto;
 `
 
 const NoteContent = styled.textarea`
