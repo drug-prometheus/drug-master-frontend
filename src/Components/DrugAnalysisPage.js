@@ -119,7 +119,7 @@ const DrugAnalysisPage = () => {
               {medication_list?.map((drug) => { 
                 let pill;
                 for (const pillInfo in pillInfos){
-                  if (pillInfos[pillInfo].medication_name === drug){
+                  if (pillInfos[pillInfo]?.medication_name === drug){
                     pill = pillInfos[pillInfo];
                     break;
                   }
@@ -136,8 +136,12 @@ const DrugAnalysisPage = () => {
                     } catch {
                       setNonMixturePills(null);
                     }
-  
-                    setIsOpen(true);
+                    try{
+                      setIsOpen(true);
+                    } catch {
+                      alert('정보가 없습니다.');
+                    }
+                    
                   }}>
                   <DrugImage src='pills_image.png' alt={drug} />
                   <DrugInfo>
@@ -154,8 +158,12 @@ const DrugAnalysisPage = () => {
                   } catch {
                     setNonMixturePills(null);
                   }
-
-                  setIsOpen(true);
+                  try{
+                    setIsOpen(true);
+                  } catch{
+                    alert('정보가 없습니다.');
+                  }
+                  
                 }}>
                   <DrugImage src='pills_image.png' alt={drug} />
                   <DrugInfo>
